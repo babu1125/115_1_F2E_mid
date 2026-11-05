@@ -1,0 +1,860 @@
+/* 閱讀提示：選擇器決定套用對象，大括號內是該元件的樣式。
+   .名稱 代表 class，#名稱 代表 id；:hover 是滑鼠移入狀態，::before／::after 是偽元素。
+   px 是固定尺寸，% 依參考尺寸計算，vw／vh 依視窗計算，em 依字級計算。
+   var(--名稱) 讀取共用變數；@media 只在符合指定視窗條件時套用。 */
+/* 本季頁面排版、配色與元件樣式 */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;600;700&display=swap");
+/* :root 樣式 */
+:root {
+  /* 共用變數 --bg，透過 var(--bg) 套用。 */
+  --bg: #0b1428;
+  --panel: #172842;
+  --gold: #e4c994;
+  --ink: #f5f1e9;
+  --muted: #b7c5d9;
+  --line: #344963;
+}
+/* 全站尺寸計算 */
+* {
+  /* border-box 讓設定的寬高包含 padding 與 border，比較容易控制元件尺寸。 */
+  box-sizing: border-box;
+}
+/* 頁面 */
+html {
+  /* smooth 讓頁內連結捲動時平順移動。 */
+  scroll-behavior: smooth;
+}
+/* 頁面基礎 */
+body {
+  /* 間距：外距 0；兩值為上下／左右，四值依序為上／右／下／左。 */
+  margin: 0;
+  /* 外觀：背景。設定底色、漸層或背景圖；漸層可疊出星空與光暈效果。 */
+  background: var(--bg);
+  /* 文字樣式：文字顏色 var(--ink)、字型 "Noto Sans TC", sans-serif、行距 1.9。 */
+  color: var(--ink);
+  font-family: "Noto Sans TC", sans-serif;
+  line-height: 1.9;
+}
+/* 頁面基礎 */
+body:before {
+  /* 設定偽元素的內容；空字串常用來建立純裝飾圖層。 */
+  content: "";
+  /* 定位方式：relative 提供子元素定位基準，absolute 依定位容器放置，sticky 在捲動時黏住指定位置。 */
+  position: fixed;
+  inset: 0;
+  /* 控制元素是否接收滑鼠事件；none 可讓裝飾層不擋住下方操作。 */
+  pointer-events: none;
+  /* 外觀：透明度、背景圖層、背景圖尺寸、背景圖位置。設定整個元素的透明度，包含內容與子元素；0 為透明，1 為不透明。 */
+  opacity: 0.32;
+  background-image:
+    radial-gradient(#fff 0.7px, transparent 1px),
+    radial-gradient(#a9c7ff 0.7px, transparent 1px);
+  background-size:
+    91px 91px,
+    147px 147px;
+  background-position:
+    4px 5px,
+    53px 37px;
+}
+/* 連結 */
+a {
+  /* 文字樣式：文字顏色 inherit、文字裝飾 none。 */
+  color: inherit;
+  text-decoration: none;
+}
+/* 按鈕 */
+button,
+input {
+  /* 文字樣式：字型簡寫 inherit。 */
+  font: inherit;
+}
+/* 按鈕 */
+button {
+  /* 設定游標外觀；pointer 提示可以點擊，grab 提示可以拖曳。 */
+  cursor: pointer;
+}
+/* 頁首 */
+header {
+  /* 定位：position sticky、top 0、z-index 10；偏移值配合定位方式決定實際位置。 */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  /* 外觀：背景、背景模糊、下方分隔線。模糊元素後方的背景，搭配半透明底色形成玻璃效果。 */
+  background: #101c30ed;
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid #ffffff18;
+}
+/* 導覽列 */
+.nav {
+  /* 最大寬度 1200px。 */
+  max-width: 1200px;
+  /* 間距：外距 auto、內距 14px 26px。 */
+  margin: auto;
+  padding: 14px 26px;
+  /* 使用 Flex 排列；主方向分散到兩側；交叉方向置中；間隔 20px。 */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+/* 網站標誌 */
+.logo {
+  /* 文字樣式：字級 22px、字重 700、字距 5px。 */
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 5px;
+}
+/* 網站標誌・補充文字 */
+.logo small {
+  /* 以 block 方式顯示。 */
+  display: block;
+  /* 文字樣式：字型 Georgia, serif、字級 11px、文字顏色 var(--muted)、字距 2px、行距 1。 */
+  font-family: Georgia, serif;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  line-height: 1;
+}
+/* 網站標誌 */
+.logo b {
+  /* 文字樣式：文字顏色 var(--gold)。 */
+  color: var(--gold);
+}
+/* 導覽連結 */
+.navlinks {
+  /* 使用 Flex 排列；間隔 24px。 */
+  display: flex;
+  gap: 24px;
+  /* 文字樣式：文字顏色 #cbd5e4、字級 14px。 */
+  color: #cbd5e4;
+  font-size: 14px;
+}
+/* 導覽連結・連結 */
+.navlinks a:hover,
+.navlinks a.active {
+  /* 文字樣式：文字顏色 var(--gold)。 */
+  color: var(--gold);
+}
+/* 主要內容 */
+main {
+  /* 最大寬度 1200px。 */
+  max-width: 1200px;
+  /* 間距：外距 auto、內距 38px 26px 80px。 */
+  margin: auto;
+  padding: 38px 26px 80px;
+}
+/* 所在位置導覽 */
+.crumb {
+  /* 文字樣式：文字顏色 var(--gold)、字級 13px。 */
+  color: var(--gold);
+  font-size: 13px;
+  /* 間距：下外距 22px。 */
+  margin-bottom: 22px;
+}
+/* 所在位置導覽 */
+.crumb span {
+  /* 文字樣式：文字顏色 #8397b5。 */
+  color: #8397b5;
+  /* 間距：外距 0 8px。 */
+  margin: 0 8px;
+}
+/* 主視覺 */
+.hero {
+  /* 外觀：背景、邊框、圓角、陰影或光暈。設定邊框粗細、線型與顏色；透明色可做出較柔和的分隔。 */
+  background: linear-gradient(125deg, #203554, #101d35);
+  border: 1px solid #405371;
+  border-radius: 26px;
+  /* 間距：內距 34px。 */
+  padding: 34px;
+  /* 使用 Grid 網格排列；交叉方向置中；間隔 44px；grid-template-columns 決定欄數與寬度，fr 表示可分配空間的比例。 */
+  display: grid;
+  grid-template-columns: 1.12fr 1fr;
+  gap: 44px;
+  align-items: center;
+  box-shadow: 0 20px 80px #0004;
+}
+/* 星圖 */
+.sky {
+  /* 定位：position relative；偏移值配合定位方式決定實際位置。 */
+  position: relative;
+  /* 控制超出容器的內容：hidden 裁切，auto 在需要時提供捲動。 */
+  overflow: hidden;
+  /* 最小高度 380px。 */
+  min-height: 380px;
+  /* 外觀：圓角、背景。 */
+  border-radius: 18px;
+  background:
+    radial-gradient(ellipse at 60% 35%, #34598a88, transparent 55%),
+    linear-gradient(#0a1733, #294268);
+  /* 使用 Flex 排列；主方向置中；交叉方向置中。 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* 星圖・向量圖 */
+.sky svg {
+  /* 寬度 100%；高度 auto。 */
+  width: 100%;
+  height: auto;
+}
+/* 星圖・標籤 */
+.sky .tag {
+  /* 定位：position absolute、bottom 14px、left 18px；偏移值配合定位方式決定實際位置。 */
+  position: absolute;
+  bottom: 14px;
+  left: 18px;
+  /* 文字樣式：文字顏色 #d2dfef、字級 11px。 */
+  color: #d2dfef;
+  font-size: 11px;
+  /* 外觀：背景、圓角。 */
+  background: #0a173399;
+  border-radius: 30px;
+  /* 間距：內距 4px 12px。 */
+  padding: 4px 12px;
+}
+/* .eyebrow 樣式 */
+.eyebrow {
+  /* 文字樣式：文字顏色 var(--gold)、字距 3px、字級 12px。 */
+  color: var(--gold);
+  letter-spacing: 3px;
+  font-size: 12px;
+}
+/* 主視覺・主標題 */
+.hero h1 {
+  /* 文字樣式：字型 "Noto Serif TC", serif、字級 clamp(38px, 5vw, 64px)、行距 1.4、字距 4px。 clamp 依序指定最小值、彈性值與最大值。 */
+  font-family: "Noto Serif TC", serif;
+  font-size: clamp(38px, 5vw, 64px);
+  /* 間距：外距 10px 0 0。 */
+  margin: 10px 0 0;
+  line-height: 1.4;
+  letter-spacing: 4px;
+}
+/* 英文名稱 */
+.latin {
+  /* 文字樣式：字型簡寫 依下方清單、文字顏色 #d9e3f0、字距 3px。 */
+  font:
+    22px Georgia,
+    serif;
+  color: #d9e3f0;
+  letter-spacing: 3px;
+}
+/* 介紹文字 */
+.lead {
+  /* 文字樣式：字級 16px、文字顏色 #d6e0ed。 */
+  font-size: 16px;
+  color: #d6e0ed;
+  /* 間距：外距 22px 0。 */
+  margin: 22px 0;
+}
+/* 統計資訊 */
+.stats {
+  /* 使用 Grid 網格排列；間隔 12px；grid-template-columns 決定欄數與寬度，fr 表示可分配空間的比例。 */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  /* 間距：外距 24px 0。 */
+  margin: 24px 0;
+}
+/* 統計資訊 */
+.stat {
+  /* 間距：內距 13px 16px。 */
+  padding: 13px 16px;
+  /* 外觀：邊框、圓角、背景。 */
+  border: 1px solid #ffffff26;
+  border-radius: 12px;
+  background: #ffffff08;
+}
+/* 統計資訊・標示 */
+.stat label {
+  /* 以 block 方式顯示。 */
+  display: block;
+  /* 文字樣式：文字顏色 var(--gold)、字級 12px。 */
+  color: var(--gold);
+  font-size: 12px;
+}
+/* 統計資訊・重點文字 */
+.stat strong {
+  /* 文字樣式：字級 14px。 */
+  font-size: 14px;
+}
+/* 按鈕 */
+.btn {
+  /* 以 inline-flex 方式顯示；主方向置中；交叉方向置中；間隔 8px。 */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  /* 外觀：背景、邊框、圓角。 */
+  background: var(--gold);
+  border: 1px solid var(--gold);
+  /* 文字樣式：文字顏色 #18243a、字重 700。 */
+  color: #18243a;
+  font-weight: 700;
+  border-radius: 50px;
+  /* 間距：內距 10px 20px、外距 5px 8px 5px 0。 */
+  padding: 10px 20px;
+  margin: 5px 8px 5px 0;
+  /* 讓屬性變化在指定時間內逐步完成，常用於滑鼠移入與選取效果。 */
+  transition: 0.2s;
+}
+/* 按鈕 */
+.btn:hover {
+  /* 以平移、旋轉或縮放調整外觀，不直接改變原本的排版佔位。 */
+  transform: translateY(-2px);
+  /* 外觀：濾鏡。對元素本身套用模糊、亮度等視覺效果。 */
+  filter: brightness(1.08);
+}
+/* 按鈕・次要 */
+.btn.secondary {
+  /* 外觀：背景。 */
+  background: transparent;
+  /* 文字樣式：文字顏色 var(--gold)。 */
+  color: var(--gold);
+}
+/* 內容區 */
+.section {
+  /* 間距：上外距 60px。 */
+  margin-top: 60px;
+}
+/* 內容區・區塊標題 */
+.section-head {
+  /* 使用 Flex 排列；交叉方向置中；間隔 18px。 */
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  /* 間距：下外距 23px。 */
+  margin-bottom: 23px;
+}
+/* 內容區・區塊標題 */
+.section-head:after {
+  /* 設定偽元素的內容；空字串常用來建立純裝飾圖層。 */
+  content: "";
+  /* 高度 1px。 */
+  height: 1px;
+  /* 。 */
+  flex: 1;
+  /* 外觀：背景。 */
+  background: linear-gradient(90deg, #d8c18d77, transparent);
+}
+/* 區塊標題 */
+h2 {
+  /* 文字樣式：字型 "Noto Serif TC", serif、字級 27px、字距 2px。 */
+  font-family: "Noto Serif TC", serif;
+  font-size: 27px;
+  letter-spacing: 2px;
+  /* 間距：外距 0。 */
+  margin: 0;
+}
+/* .subtitle 樣式 */
+.subtitle {
+  /* 文字樣式：文字顏色 var(--muted)、字級 13px。 */
+  color: var(--muted);
+  font-size: 13px;
+}
+/* 卡片群組 */
+.cards {
+  /* 使用 Grid 網格排列；間隔 16px；grid-template-columns 決定欄數與寬度，fr 表示可分配空間的比例。 */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+/* 卡片 */
+.card {
+  /* 外觀：背景、邊框、圓角。 */
+  background: #1b2c48;
+  border: 1px solid #3a4c67;
+  border-radius: 18px;
+  /* 間距：內距 22px。 */
+  padding: 22px;
+  /* 讓屬性變化在指定時間內逐步完成，常用於滑鼠移入與選取效果。 */
+  transition: 0.2s;
+}
+/* 卡片 */
+.card.link:hover {
+  /* 外觀：邊框顏色。改變邊框顏色，常用來強調滑鼠移入或選取狀態。 */
+  border-color: var(--gold);
+  /* 以平移、旋轉或縮放調整外觀，不直接改變原本的排版佔位。 */
+  transform: translateY(-4px);
+}
+/* 卡片・次標題 */
+.card h3 {
+  /* 間距：外距 0 0 8px。 */
+  margin: 0 0 8px;
+  /* 文字樣式：文字顏色 var(--gold)、字級 17px。 */
+  color: var(--gold);
+  font-size: 17px;
+}
+/* 卡片・文字段落 */
+.card p {
+  /* 文字樣式：文字顏色 #cbd7e7、字級 14px。 */
+  color: #cbd7e7;
+  font-size: 14px;
+  /* 間距：外距 0。 */
+  margin: 0;
+}
+/* 圖文介紹 */
+.feature {
+  /* 使用 Grid 網格排列；交叉方向置中；間隔 26px；grid-template-columns 決定欄數與寬度，fr 表示可分配空間的比例。 */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+  align-items: center;
+}
+/* 補充提醒 */
+.note {
+  border-left: 3px solid var(--gold);
+  /* 外觀：背景、圓角。 */
+  background: #e4c9940e;
+  /* 間距：內距 17px 20px。 */
+  padding: 17px 20px;
+  border-radius: 0 12px 12px 0;
+  /* 文字樣式：文字顏色 #d6dfeb、字級 14px。 */
+  color: #d6dfeb;
+  font-size: 14px;
+}
+/* 星圖示意 */
+.diagram {
+  /* 外觀：背景、邊框、圓角。 */
+  background: #172a46;
+  border: 1px solid #3c506d;
+  border-radius: 20px;
+  /* 間距：內距 25px。 */
+  padding: 25px;
+}
+/* 星圖示意・向量圖 */
+.diagram svg {
+  /* 寬度 100%；高度 auto。 */
+  width: 100%;
+  height: auto;
+}
+/* 神話故事・橫幅 */
+.story-banner {
+  /* 外觀：圓角、背景、邊框。 */
+  border-radius: 22px;
+  /* 控制超出容器的內容：hidden 裁切，auto 在需要時提供捲動。 */
+  overflow: hidden;
+  background: linear-gradient(105deg, #3c2e36, #1a2b47 70%);
+  border: 1px solid #6b5860;
+  /* 間距：內距 34px。 */
+  padding: 34px;
+  /* 使用 Grid 網格排列；交叉方向置中；間隔 30px；grid-template-columns 決定欄數與寬度，fr 表示可分配空間的比例。 */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: center;
+}
+/* 神話故事・橫幅・次標題 */
+.story-banner h3 {
+  /* 文字樣式：字型 "Noto Serif TC", serif、字級 27px。 */
+  font-family: "Noto Serif TC", serif;
+  font-size: 27px;
+  /* 間距：外距 10px 0。 */
+  margin: 10px 0;
+}
+/* 神話故事・橫幅・文字段落 */
+.story-banner p {
+  /* 文字樣式：文字顏色 #d6dbe4。 */
+  color: #d6dbe4;
+}
+/* 面板 */
+.panel {
+  /* 外觀：背景、邊框、圓角。 */
+  background: #182b46;
+  border: 1px solid #40516d;
+  border-radius: 18px;
+  /* 間距：內距 25px。 */
+  padding: 25px;
+}
+/* 故事章節 */
+.chapter {
+  /* 間距：內距 24px 0、外距 auto。 */
+  padding: 24px 0;
+  /* 外觀：下方分隔線。 */
+  border-bottom: 1px solid #ffffff22;
+  /* 最大寬度 840px。 */
+  max-width: 840px;
+  margin: auto;
+}
+/* 故事章節・次標題 */
+.chapter h3 {
+  /* 文字樣式：文字顏色 var(--gold)、字型 "Noto Serif TC", serif、字級 22px。 */
+  color: var(--gold);
+  font-family: "Noto Serif TC", serif;
+  font-size: 22px;
+}
+/* 故事章節・文字段落 */
+.chapter p {
+  /* 文字樣式：文字顏色 #d6e0ed。 */
+  color: #d6e0ed;
+}
+/* 故事章節 */
+.chapter:last-child {
+  /* 外觀：下方分隔線。 */
+  border-bottom: 0;
+}
+/* 觀星指南 */
+.guide {
+  /* 使用 Grid 網格排列；間隔 20px；grid-template-columns 決定欄數與寬度，fr 表示可分配空間的比例。 */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+/* 參考資料 */
+.sources {
+  /* 文字樣式：文字顏色 #afc0d5、字級 13px。 */
+  color: #afc0d5;
+  font-size: 13px;
+  /* 外觀：上方分隔線。設定上方邊框，作為內容區的視覺分隔。 */
+  border-top: 1px solid #ffffff22;
+  /* 間距：上留白 18px。 */
+  padding-top: 18px;
+}
+/* 參考資料・連結 */
+.sources a {
+  /* 文字樣式：文字裝飾 underline、text-underline-offset。 */
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+/* 參考資料 */
+.sources li {
+  /* 間距：外距 8px 0。 */
+  margin: 8px 0;
+}
+/* 頁尾 */
+footer {
+  /* 文字樣式：文字對齊 center、文字顏色 #91a3bd、字級 12px。 */
+  text-align: center;
+  color: #91a3bd;
+  /* 間距：內距 36px 20px。 */
+  padding: 36px 20px;
+  /* 外觀：上方分隔線。 */
+  border-top: 1px solid #ffffff18;
+  font-size: 12px;
+}
+/* 小字說明 */
+.tiny {
+  /* 文字樣式：文字顏色 #a8b8ce、字級 12px。 */
+  color: #a8b8ce;
+  font-size: 12px;
+}
+/* .pill 樣式 */
+.pill {
+  /* 文字樣式：文字顏色 var(--gold)、字級 12px。 */
+  color: var(--gold);
+  /* 外觀：邊框、圓角。 */
+  border: 1px solid #8b7954;
+  /* 間距：內距 3px 11px。 */
+  padding: 3px 11px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+/* 卡片列表 */
+.collection {
+  /* 使用 Grid 網格排列；間隔 18px；grid-template-columns 決定欄數與寬度，fr 表示可分配空間的比例。 */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+/* 卡片列表・卡片 */
+.collection .card {
+  /* 間距：內距 0。 */
+  padding: 0;
+  /* 控制超出容器的內容：hidden 裁切，auto 在需要時提供捲動。 */
+  overflow: hidden;
+}
+/* 卡片列表・卡片・卡片內容 */
+.collection .card .inside {
+  /* 間距：內距 22px。 */
+  padding: 22px;
+}
+/* 卡片列表・星圖 */
+.collection .sky {
+  /* 最小高度 220px。 */
+  min-height: 220px;
+  /* 外觀：圓角。 */
+  border-radius: 0;
+}
+/* 卡片列表・星圖・向量圖 */
+.collection .sky svg {
+  /* 最大高度 250px。 */
+  max-height: 250px;
+}
+/* 搜尋欄 */
+.search {
+  /* 寬度 100%。 */
+  width: 100%;
+  /* 間距：內距 14px 20px、外距 15px 0 24px。 */
+  padding: 14px 20px;
+  /* 外觀：圓角、邊框、背景。 */
+  border-radius: 14px;
+  border: 1px solid #61758e;
+  background: #14243d;
+  /* 文字樣式：文字顏色 #fff。 */
+  color: #fff;
+  margin: 15px 0 24px;
+}
+/* .tabs 樣式 */
+.tabs {
+  /* 使用 Flex 排列；間隔 10px；空間不足時換行。 */
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  /* 間距：外距 16px 0。 */
+  margin: 16px 0;
+}
+/* 按鈕 */
+.tabs button {
+  /* 外觀：邊框、圓角、背景。 */
+  border: 1px solid #53647e;
+  border-radius: 30px;
+  background: #1b2c48;
+  /* 文字樣式：文字顏色 #d5dfeb。 */
+  color: #d5dfeb;
+  /* 間距：內距 8px 18px。 */
+  padding: 8px 18px;
+}
+/* 按鈕・目前選項 */
+.tabs button.active {
+  /* 外觀：背景。 */
+  background: var(--gold);
+  /* 文字樣式：文字顏色 #15243b。 */
+  color: #15243b;
+}
+/* 次要文字 */
+.muted {
+  /* 文字樣式：文字顏色 var(--muted)。 */
+  color: var(--muted);
+}
+/* 相關星座 */
+.related {
+  /* 使用 Grid 網格排列；間隔 16px；grid-template-columns 決定欄數與寬度，fr 表示可分配空間的比例。 */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+/* 星座裝飾 */
+.artline {
+  /* 文字樣式：文字顏色 var(--gold)、字型 Georgia, serif、字級 95px、行距 1.3、文字對齊 center。 */
+  color: var(--gold);
+  font-family: Georgia, serif;
+  font-size: 95px;
+  line-height: 1.3;
+  text-align: center;
+  text-shadow: 0 0 55px #e4c99455;
+}
+/* 星座裝飾 */
+.artline span {
+  /* 以 block 方式顯示。 */
+  display: block;
+  /* 文字樣式：字級 16px、字距 5px。 */
+  font-size: 16px;
+  letter-spacing: 5px;
+}
+/* 選單 */
+.menu {
+  /* 隱藏此元件。 */
+  display: none;
+}
+/* 當螢幕符合這個條件時，套用接下來的響應式排版規則。 */
+@media (max-width: 800px) {
+  /* 導覽列 */
+  .nav {
+    /* 以 block 方式顯示。 */
+    display: block;
+    /* 間距：內距 12px 16px。 */
+    padding: 12px 16px;
+  }
+  /* 選單 */
+  .menu {
+    /* 以 block 方式顯示。 */
+    display: block;
+    /* 定位：position absolute、right 16px、top 18px；偏移值配合定位方式決定實際位置。 */
+    position: absolute;
+    right: 16px;
+    top: 18px;
+    /* 外觀：背景、邊框、圓角。 */
+    background: transparent;
+    /* 文字樣式：文字顏色 var(--gold)。 */
+    color: var(--gold);
+    border: 1px solid #6a7891;
+    border-radius: 8px;
+    /* 間距：內距 2px 10px。 */
+    padding: 2px 10px;
+  }
+  /* 導覽連結 */
+  .navlinks {
+    /* 隱藏此元件；子項目由上往下排列；間隔 8px。 */
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    /* 間距：上留白 15px。 */
+    padding-top: 15px;
+  }
+  /* 導覽連結・展開狀態 */
+  .navlinks.open {
+    /* 使用 Flex 排列。 */
+    display: flex;
+  }
+  /* 主視覺 */
+  .hero,
+  .feature,
+  .story-banner,
+  .guide {
+    /* grid-template-columns 決定欄數與寬度，fr 表示可分配空間的比例。 */
+    grid-template-columns: 1fr;
+  }
+  /* 主視覺 */
+  .hero {
+    /* 間距：內距 18px。 */
+    padding: 18px;
+    /* 間隔 18px。 */
+    gap: 18px;
+  }
+  /* 星圖 */
+  .sky {
+    /* 最小高度 240px。 */
+    min-height: 240px;
+  }
+  /* 卡片群組 */
+  .cards,
+  .related {
+    /* grid-template-columns 決定欄數與寬度，fr 表示可分配空間的比例。 */
+    grid-template-columns: 1fr;
+  }
+  /* 卡片列表 */
+  .collection {
+    /* 間隔 10px；grid-template-columns 決定欄數與寬度，fr 表示可分配空間的比例。 */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  /* 卡片列表・卡片・卡片內容 */
+  .collection .card .inside {
+    /* 間距：內距 12px。 */
+    padding: 12px;
+  }
+  /* 卡片列表・星圖 */
+  .collection .sky {
+    /* 最小高度 140px。 */
+    min-height: 140px;
+  }
+  /* 卡片列表・星圖・向量圖 */
+  .collection .sky svg {
+    /* 最大高度 170px。 */
+    max-height: 170px;
+  }
+  /* 主要內容 */
+  main {
+    /* 間距：內距 24px 15px 60px。 */
+    padding: 24px 15px 60px;
+  }
+  /* 主視覺・主標題 */
+  .hero h1 {
+    /* 文字樣式：字級 42px。 */
+    font-size: 42px;
+  }
+  /* 神話故事・橫幅 */
+  .story-banner {
+    /* 間距：內距 20px。 */
+    padding: 20px;
+  }
+  /* 區塊標題 */
+  h2 {
+    /* 文字樣式：字級 23px。 */
+    font-size: 23px;
+  }
+  /* 統計資訊 */
+  .stats {
+    /* 間隔 7px。 */
+    gap: 7px;
+  }
+  /* 統計資訊 */
+  .stat {
+    /* 間距：內距 10px。 */
+    padding: 10px;
+  }
+  /* 統計資訊・重點文字 */
+  .stat strong {
+    /* 文字樣式：字級 12px。 */
+    font-size: 12px;
+  }
+}
+/* .complete-return 樣式 */
+.complete-return {
+  /* 定位：position fixed、right 18px、bottom 18px、z-index 9999；偏移值配合定位方式決定實際位置。 */
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 9999;
+  /* 間距：內距 12px 18px。 */
+  padding: 12px 18px;
+  /* 外觀：邊框、背景、圓角、陰影或光暈。 */
+  border: 1px solid #e4c58f;
+  background: #101d34;
+  /* 文字樣式：文字顏色 #e4c58f、文字裝飾 none、字級 14px、字重 700。 */
+  color: #e4c58f;
+  border-radius: 40px;
+  text-decoration: none;
+  box-shadow: 0 8px 30px #0008;
+  font-size: 14px;
+  font-weight: 700;
+}
+/* .complete-return:hover 樣式 */
+.complete-return:hover {
+  /* 外觀：背景。 */
+  background: #273b59;
+}
+/* .complete-seasons 樣式 */
+.complete-seasons {
+  /* 定位：position fixed、left 12px、bottom 12px、z-index 9998；偏移值配合定位方式決定實際位置。 */
+  position: fixed;
+  left: 12px;
+  bottom: 12px;
+  z-index: 9998;
+  /* 使用 Flex 排列；交叉方向置中；間隔 8px。 */
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  /* 外觀：背景、邊框、圓角。 */
+  background: #101d34ed;
+  border: 1px solid #e4c58f55;
+  border-radius: 30px;
+  /* 間距：內距 10px 14px。 */
+  padding: 10px 14px;
+  /* 文字樣式：文字顏色 #e4c58f、字級 13px。 */
+  color: #e4c58f;
+  font-size: 13px;
+}
+/* 連結 */
+.complete-seasons a {
+  /* 文字樣式：文字顏色 #e8eefb、文字裝飾 none。 */
+  color: #e8eefb;
+  text-decoration: none;
+}
+/* 連結 */
+.complete-seasons a:hover {
+  /* 文字樣式：文字顏色 #e4c58f。 */
+  color: #e4c58f;
+}
+/* 當螢幕符合這個條件時，套用接下來的響應式排版規則。 */
+@media (max-width: 720px) {
+  /* .complete-seasons 樣式 */
+  .complete-seasons {
+    /* 定位：position static；偏移值配合定位方式決定實際位置。 */
+    position: static;
+    /* 間距：外距 18px 12px 78px。 */
+    margin: 18px 12px 78px;
+    /* 主方向置中；空間不足時換行。 */
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  /* .complete-return 樣式 */
+  .complete-return {
+    /* 設定與定位參考區下緣的距離。 */
+    bottom: 12px;
+    right: 12px;
+    /* 文字樣式：字級 12px。 */
+    font-size: 12px;
+    /* 間距：內距 10px 12px。 */
+    padding: 10px 12px;
+  }
+}

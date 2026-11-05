@@ -1,0 +1,10 @@
+/* 閱讀提示：選擇器決定套用對象，大括號內是該元件的樣式。
+   .名稱 代表 class，#名稱 代表 id；:hover 是滑鼠移入狀態，::before／::after 是偽元素。
+   px 是固定尺寸，% 依參考尺寸計算，vw／vh 依視窗計算，em 依字級計算。
+   var(--名稱) 讀取共用變數；@media 只在符合指定視窗條件時套用。 */
+/* 共用導覽列設定 */
+/* 共用導覽區擴充樣式；原有各季 header 規則保持不變 */
+:root {
+  /* 共用變數 --xingxu-header-height，透過 var(--xingxu-header-height) 套用。 */
+  --xingxu-header-height: 72px;
+}

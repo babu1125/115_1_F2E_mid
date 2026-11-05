@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <!-- 讓瀏覽器正確顯示中文，並依手機或電腦螢幕調整頁面寬度。 -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="星序｜Seasons of the Sky，探索四季十六星座、天文知識與希臘神話的互動網站。"
+    />
+    <!-- 網頁標題 -->
+    <title>星序｜Seasons of the Sky · 四季星空探索</title>
+    <!-- CSS連結 -->
+    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="css/v2.css" />
+    <link rel="stylesheet" href="css/colors.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <!-- 設定瀏覽器分頁與手機桌面上的網站圖示。 -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  </head>
+  
+  <!-- 網頁內容 -->
+  <body>
+    <!-- 網站標誌&導覽列 -->
+    <header class="top">
+      <!-- 連結們 -->
+      <a class="brand" href="index.html">
+        <!-- ✦ 星序 SEASONS OF THE SKY -->
+        <span class="brandmark">✦</span>
+        <span>星序 <small>SEASONS OF THE SKY</small></span>       
+      </a>
+      <!-- 導覽列 -->
+      <nav aria-label="主要導覽">
+        <a href="#seasons">四季星空</a>
+        <a href="#catalog">星座圖鑑</a>
+        <a href="observatory.html">🔭 星空觀測站</a>
+        <a href="#about">關於星序</a>
+      </nav>
+      <!-- 點 ☰ 看導覽 -->
+      <button
+        class="mobile-nav"
+        id="navBtn"
+        aria-label="展開導覽"
+        aria-expanded="false"
+        >
+        ☰
+      </button>
+    </header>
+    
+    <!-- 主要內容 -->
+    <main>
+      <!-- 主視覺 -->
+      <section class="hero">
+        <div class="hero-glow"></div> <!-- css渲染用 -->
+        
+        <div class="hero-inner">
+          <p class="eyebrow">A JOURNEY THROUGH THE STARS · 四季星空導覽</p>
+          <h1>沿著四季的軌跡<br /><em>遇見每一顆星的故事</em></h1>
+          <p class="hero-copy">
+            從春夜的獅子，到冬季的獵人。走進 16
+            個代表星座，探索真實天文、古老神話與可以親手操作的星空互動。
+          </p>
+          <!-- 主視覺連結區 -->
+          <div class="hero-actions">
+            <a class="btn primary" href="#seasons">
+              開始探索四季 <span>↗</span></a>
+            <a class="btn ghost" href="#catalog">
+              瀏覽十六星座</a>
+            <a class="btn ghost" href="observatory.html">
+              🔭 開啟星空觀測站</a>
+          </div>
+          <!-- 統計數據區 -->
+          <div class="hero-stats">
+            <span><strong>04</strong> 四季篇章</span>
+            <span><strong>16</strong> 代表星座</span>
+            <span><strong>64+</strong> 星光探索線索</span>
+          </div>
+        </div>
+        <!-- 背景 對無障礙隱藏 -->
+        <div class="hero-art" aria-hidden="true">
+          <div class="orbit orbit1"></div>
+          <div class="orbit orbit2"></div>
+          <div class="orbit orbit3"></div>
+          <div class="central-star">✧</div>
+          <div class="orb-label a">SPRING</div>
+          <div class="orb-label b">SUMMER</div>
+          <div class="orb-label c">AUTUMN</div>
+          <div class="orb-label d">WINTER</div>
+        </div>
+      </section>
+      <!-- 01區 -->
+      <section id="seasons" class="section">
+        <!-- 區介紹 -->
+        <div class="section-head">
+          <p class="eyebrow">01 · SEASONS</p>
+          <h2>選擇一片屬於你的星空</h2>
+          <p>每個季節，都有不同的星座輪廓與神話等待發現。</p>
+        </div>
+        <!-- 季節卡區 -->
+        <div class="season-grid">
+          <!-- 季節卡-春 -->
+          <a class="season-card spring" href="spring/index.html">
+            <div class="season-icon">🌸</div>
+            <div class="season-bottom">
+              <span class="season-en">SPRING · 春季</span>
+              <h3>春夜初醒</h3>
+              <p>獅子座・室女座・牧夫座・巨蟹座</p>
+              <span class="season-link">進入春季星空 ↗</span>
+            </div>
+          </a>
+          <!-- 季節卡-夏 -->
+          <a class="season-card summer" href="summer/index.html">
+            <div class="season-icon">☀️</div>
+            <div class="season-bottom">
+              <span class="season-en">SUMMER · 夏季</span>
+              <h3>銀河盛夏</h3>
+              <p>天琴座・天鷹座・天鵝座・天蠍座</p>
+              <span class="season-link">進入夏季星空 ↗</span>
+            </div>
+          </a>
+          <!-- 季節卡-秋 -->
+          <a class="season-card autumn" href="autumn/index.html">
+            <div class="season-icon">🍁</div>
+            <div class="season-bottom">
+              <span class="season-en">AUTUMN · 秋季</span>
+              <h3>神話之秋</h3>
+              <p>仙女座・飛馬座・仙后座・英仙座</p>
+              <span class="season-link">進入秋季星空 ↗</span>
+            </div>
+          </a>
+          <!-- 季節卡-冬 -->
+          <a class="season-card winter" href="winter/index.html">
+            <div class="season-icon">❄️</div>
+            <div class="season-bottom">
+              <span class="season-en">WINTER · 冬季</span>
+              <h3>璀璨冬夜</h3>
+              <p>獵戶座・金牛座・雙子座・大犬座</p>
+              <span class="season-link">進入冬季星空 ↗</span>
+            </div>
+          </a>
+        </div>
+      </section>
+      
+      <!-- 02區 -->
+      <section id="catalog" class="section catalog-section">
+        <!-- 區介紹 -->
+        <div class="section-head">
+          <p class="eyebrow">02 · CONSTELLATION ATLAS</p>
+          <h2>十六星座圖鑑</h2>
+          <p>搜尋名稱或關鍵字，選擇季節，直接前往星座介紹與互動探索。</p>
+        </div>
+        <!-- 星座圖鑑 -->  
+        <div class="catalog-controls">
+          <!-- 搜尋bar -->
+          <label class="search">
+            <span>⌕</span>
+            <input
+              id="search"
+              placeholder="搜尋：獵戶座、Orion、天狼星…"
+              aria-label="搜尋星座"
+              autocomplete="off"/>
+          </label>
+          <!-- 篩選器鈕 -->
+          <div class="filters" role="group" aria-label="季節篩選">
+            <button data-season="all" class="active">全部</button>
+            <button data-season="spring">🌸 春</button>
+            <button data-season="summer">☀️ 夏</button>
+            <button data-season="autumn">🍁 秋</button>
+            <button data-season="winter">❄️ 冬</button>
+          </div>
+        </div>
+        <p id="resultCount" class="result-count" aria-live="polite"></p> <!-- 計數 -->
+        <div id="starGrid" class="star-grid"></div><!-- 星座卡 -->
+        <div id="empty" class="empty" hidden> <!-- 沒找到東西 -->
+          找不到符合條件的星座，試試其他關鍵字吧 ✨
+        </div>
+      </section>
+      
+      <!-- 03區 -->
+      <section id="about" class="section about">
+        <div>
+          <p class="eyebrow">03 · ABOUT THE PROJECT</p>
+          <h2>讓星空，不只是遙遠的光</h2>
+          <p>
+            《星序｜Seasons of the
+            Sky》是一個結合天文科普、星座神話與互動導覽的學習型網站。希望讓初次接觸觀星的人，也能從熟悉的故事開始，一步步認識真實夜空。
+          </p>
+          <p>
+            我們將天文學與占星文化清楚區分；互動星圖為教學示意，並非即時、精確的天文定位系統。
+          </p>
+        </div>
+        <!-- mark -->
+        <div class="about-mark" aria-hidden="true">
+          ✧<span>SEASONS<br />OF THE SKY</span>
+        </div>
+      </section>
+    </main>
+    
+    <!-- 頁尾 -->
+    <footer>
+      <span>✦ 星序 · Seasons of the Sky</span>
+      <span>四季流轉，星光不息</span>
+      <a href="#">回到頂端 ↑</a>
+    </footer>
+
+    <!-- 連結js檔 -->
+    <script src="js/catalog.js"></script>
+    <script src="js/site.js"></script>
+  </body>
+</html>

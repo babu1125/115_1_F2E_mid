@@ -1,0 +1,14 @@
+/* 閱讀提示：選擇器決定套用對象，大括號內是該元件的樣式。
+   .名稱 代表 class，#名稱 代表 id；:hover 是滑鼠移入狀態，::before／::after 是偽元素。
+   px 是固定尺寸，% 依參考尺寸計算，vw／vh 依視窗計算，em 依字級計算。
+   var(--名稱) 讀取共用變數；@media 只在符合指定視窗條件時套用。 */
+/* 全站色彩設定 */
+/* 星序共用色票：供新增頁面與未來統一調色使用。 */
+:root {
+  /* 共用變數 --xingxu-night，透過 var(--xingxu-night) 套用。 */
+  --xingxu-night: #091428;
+  --xingxu-panel: #192c49;
+  --xingxu-gold: #e9c58a;
+  --xingxu-text: #e8efff;
+  --xingxu-muted: #b8c9e2;
+}

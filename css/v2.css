@@ -1,0 +1,329 @@
+/* 閱讀提示：選擇器決定套用對象，大括號內是該元件的樣式。
+   .名稱 代表 class，#名稱 代表 id；:hover 是滑鼠移入狀態，::before／::after 是偽元素。
+   px 是固定尺寸，% 依參考尺寸計算，vw／vh 依視窗計算，em 依字級計算。
+   var(--名稱) 讀取共用變數；@media 只在符合指定視窗條件時套用。 */
+/* 互動星圖與季節頁面擴充樣式 */
+/* XingXu Complete V2 shared enhancements */
+.v2-season-art,
+.v2-chart {
+  /* 寬度 100%；最小寬度 0。 */
+  width: 100%;
+  min-width: 0;
+  /* 外觀：背景、邊框、圓角。設定底色、漸層或背景圖；漸層可疊出星空與光暈效果。 */
+  background: #0d1b37;
+  border: 1px solid #415475;
+  border-radius: 20px;
+  /* 控制超出容器的內容：hidden 裁切，auto 在需要時提供捲動。 */
+  overflow: hidden;
+  /* 間距：內距 10px；兩值為上下／左右，四值依序為上／右／下／左。 */
+  padding: 10px;
+}
+/* 季節・裝飾圖・向量圖 */
+.v2-season-art svg,
+.v2-chart svg {
+  /* 以 block 方式顯示。 */
+  display: block;
+  /* 寬度 100%；高度 auto。 */
+  width: 100%;
+  height: auto;
+}
+/* 星座 */
+.v2-pattern-star,
+.v2-star {
+  /* 設定游標外觀；pointer 提示可以點擊，grab 提示可以拖曳。 */
+  cursor: pointer;
+}
+/* 星座・星點 */
+.v2-pattern-star:hover circle:last-of-type,
+.v2-star:hover circle:last-of-type,
+.v2-star.chosen circle:last-of-type {
+  stroke: #ffe3a0;
+  stroke-width: 5;
+  /* 外觀：濾鏡。對元素本身套用模糊、亮度等視覺效果。 */
+  filter: drop-shadow(0 0 8px #fff1ad);
+}
+/* .v2-pattern-feedback, 樣式 */
+.v2-pattern-feedback,
+.v2-feedback {
+  /* 外觀：背景、圓角。 */
+  background: #1b304f;
+  /* 間距：內距 12px 15px、上外距 8px。 */
+  padding: 12px 15px;
+  border-radius: 11px;
+  /* 文字樣式：文字顏色 #f2dfb9、字級 14px、行距 1.6。 */
+  color: #f2dfb9;
+  font-size: 14px;
+  margin-top: 8px;
+  line-height: 1.6;
+}
+/* 文字段落 */
+.v2-feedback p {
+  /* 間距：外距 3px 0。 */
+  margin: 3px 0;
+}
+/* .v2-disclaimer 樣式 */
+.v2-disclaimer {
+  /* 文字樣式：字級 12px、行距 1.7、文字顏色 #b5c8e2。 */
+  font-size: 12px;
+  line-height: 1.7;
+  color: #b5c8e2;
+  /* 間距：外距 9px 4px 3px。 */
+  margin: 9px 4px 3px;
+}
+/* .v2-tabs 樣式 */
+.v2-tabs {
+  /* 使用 Flex 排列；間隔 8px。 */
+  display: flex;
+  gap: 8px;
+  /* 間距：下外距 10px。 */
+  margin-bottom: 10px;
+}
+/* 按鈕 */
+.v2-tabs button {
+  /* 。 */
+  flex: 1;
+  /* 外觀：圓角、邊框、背景。 */
+  border-radius: 25px;
+  border: 1px solid #5d7091;
+  background: #1a2d4b;
+  /* 文字樣式：文字顏色 #f0f4fa、字級 13px。 */
+  color: #f0f4fa;
+  /* 間距：內距 9px 6px。 */
+  padding: 9px 6px;
+  /* 設定游標外觀；pointer 提示可以點擊，grab 提示可以拖曳。 */
+  cursor: pointer;
+  font-size: 13px;
+}
+/* 按鈕・目前選項 */
+.v2-tabs button.active {
+  /* 外觀：背景。 */
+  background: #e8cb93;
+  /* 文字樣式：文字顏色 #101d35、字重 700。 */
+  color: #101d35;
+  font-weight: 700;
+}
+/* .v2-collage 樣式 */
+.v2-collage {
+  /* 使用 Grid 網格排列；間隔 10px；grid-template-columns 決定欄數與寬度，fr 表示可分配空間的比例。 */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+/* 連結 */
+.v2-collage a {
+  /* 外觀：邊框、圓角、背景。 */
+  border: 1px solid #4e6280;
+  border-radius: 15px;
+  /* 控制超出容器的內容：hidden 裁切，auto 在需要時提供捲動。 */
+  overflow: hidden;
+  /* 文字樣式：文字裝飾 none、文字顏色 #e8d1a4。 */
+  text-decoration: none;
+  color: #e8d1a4;
+  background: #0d1b37;
+}
+/* 連結 */
+.v2-collage a:hover {
+  /* 外觀：邊框顏色。改變邊框顏色，常用來強調滑鼠移入或選取狀態。 */
+  border-color: #e8cb93;
+}
+/* .v2-collage .v2-chart 樣式 */
+.v2-collage .v2-chart {
+  /* 間距：內距 0。 */
+  padding: 0;
+  /* 外觀：邊框、圓角。 */
+  border: 0;
+  border-radius: 0;
+}
+/* .v2-collage span 樣式 */
+.v2-collage span {
+  /* 以 block 方式顯示。 */
+  display: block;
+  /* 間距：內距 5px 12px 11px。 */
+  padding: 5px 12px 11px;
+  /* 文字樣式：字級 13px。 */
+  font-size: 13px;
+}
+/* 星座・卡片 */
+.v2-star-card {
+  /* 設定游標外觀；pointer 提示可以點擊，grab 提示可以拖曳。 */
+  cursor: pointer;
+}
+/* 星座・卡片 */
+.v2-star-card:hover {
+  /* 外觀：邊框顏色。 */
+  border-color: #e8cb93;
+}
+/* .v2-cta 樣式 */
+.v2-cta {
+  /* 以 block 方式顯示。 */
+  display: block;
+  /* 文字樣式：文字顏色 #e8cb93、字級 13px。 */
+  color: #e8cb93;
+  font-size: 13px;
+  /* 間距：上外距 14px。 */
+  margin-top: 14px;
+}
+/* .v2-deep summary 樣式 */
+.v2-deep summary {
+  list-style: none;
+  /* 設定游標外觀；pointer 提示可以點擊，grab 提示可以拖曳。 */
+  cursor: pointer;
+}
+/* .v2-deep summary::-webkit-details-marker 樣式 */
+.v2-deep summary::-webkit-details-marker {
+  /* 隱藏此元件。 */
+  display: none;
+}
+/* 次標題 */
+.v2-deep h3 {
+  /* 文字樣式：文字顏色 #e8cb93。 */
+  color: #e8cb93;
+}
+/* 頁面基礎 */
+.v2-deep-body {
+  /* 外觀：上方分隔線。設定上方邊框，作為內容區的視覺分隔。 */
+  border-top: 1px solid #415475;
+  /* 間距：上外距 17px、上留白 16px。 */
+  margin-top: 17px;
+  padding-top: 16px;
+}
+/* 頁面基礎・向量圖 */
+.v2-deep-body svg {
+  /* 寬度 100%。 */
+  width: 100%;
+  /* 外觀：圓角。 */
+  border-radius: 13px;
+}
+/* 頁面基礎・文字段落 */
+.v2-deep-body p {
+  /* 文字樣式：行距 1.85。 */
+  line-height: 1.85;
+}
+/* 主視覺・季節・裝飾圖 */
+.hero > .v2-season-art,
+.hero > .v2-chart {
+  /* 最小寬度 0。 */
+  min-width: 0;
+}
+/* 星圖示意 */
+.diagram .v2-chart {
+  /* 間距：內距 0。 */
+  padding: 0;
+  /* 外觀：邊框。 */
+  border: 0;
+}
+/* 季節・裝飾圖 */
+.v2-season-art {
+  /* 最大寬度 100%。 */
+  max-width: 100%;
+}
+/* 當螢幕符合這個條件時，套用接下來的響應式排版規則。 */
+@media (max-width: 720px) {
+  /* 按鈕 */
+  .v2-tabs button {
+    /* 文字樣式：字級 11px。 */
+    font-size: 11px;
+  }
+  /* 季節・裝飾圖 */
+  .v2-season-art {
+    /* 間距：內距 5px。 */
+    padding: 5px;
+  }
+  /* .v2-pattern-feedback 樣式 */
+  .v2-pattern-feedback {
+    /* 文字樣式：字級 12px。 */
+    font-size: 12px;
+  }
+}
+/* 朋友交接版：星座形象圖片區（與下方可點擊星點圖分離） */
+.xx-art-slot {
+  /* 寬度 100%；最小高度 340px；設定寬高比例，讓圖片或星圖區在寬度改變時維持形狀。 */
+  width: 100%;
+  min-height: 340px;
+  aspect-ratio: 600/420;
+  /* 外觀：圓角、背景、邊框。 */
+  border-radius: 20px;
+  background: radial-gradient(ellipse at 50% 45%, #203757, #0d1b37 72%);
+  border: 1px solid #415475;
+  /* 使用 Grid 網格排列。 */
+  display: grid;
+  place-items: center;
+  /* 控制超出容器的內容：hidden 裁切，auto 在需要時提供捲動。 */
+  overflow: hidden;
+  /* 定位方式：relative 提供子元素定位基準，absolute 依定位容器放置，sticky 在捲動時黏住指定位置。 */
+  position: relative;
+}
+/* 裝飾圖 */
+.xx-art-slot img {
+  /* 寬度 100%；高度 100%。 */
+  width: 100%;
+  height: 100%;
+  /* 控制圖片如何填滿指定範圍；cover 保持比例並裁切，contain 則完整顯示圖片。 */
+  object-fit: contain;
+  /* 定位：position absolute、inset 0、z-index 2；偏移值配合定位方式決定實際位置。 */
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+/* 裝飾圖 */
+.xx-art-fallback {
+  /* 使用 Flex 排列；子項目由上往下排列；主方向置中；交叉方向置中；間隔 12px。 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  /* 文字樣式：文字對齊 center、文字顏色 #e9d0a0。 */
+  text-align: center;
+  color: #e9d0a0;
+  /* 間距：內距 20px。 */
+  padding: 20px;
+}
+/* 裝飾圖・重點文字 */
+.xx-art-fallback strong {
+  /* 文字樣式：字級 clamp(25px, 4vw, 40px)、文字顏色 #f5f0e7。 clamp 依序指定最小值、彈性值與最大值。 */
+  font-size: clamp(25px, 4vw, 40px);
+  color: #f5f0e7;
+}
+/* 裝飾圖 */
+.xx-art-fallback span:not(.xx-art-symbol) {
+  /* 文字樣式：字距 0.22em、字級 13px。 */
+  letter-spacing: 0.22em;
+  font-size: 13px;
+}
+/* 裝飾圖・補充文字 */
+.xx-art-fallback small {
+  /* 文字樣式：文字顏色 #aec0d8、字級 12px、行距 1.7。 */
+  color: #aec0d8;
+  font-size: 12px;
+  /* 最大寬度 330px。 */
+  max-width: 330px;
+  line-height: 1.7;
+}
+/* 裝飾圖 */
+.xx-art-symbol {
+  /* 文字樣式：字級 70px、文字顏色 #e8cb93。 */
+  font-size: 70px;
+  color: #e8cb93;
+}
+/* 裝飾圖 */
+.xx-art-slot.xx-loaded .xx-art-fallback {
+  visibility: hidden;
+}
+/* 當螢幕符合這個條件時，套用接下來的響應式排版規則。 */
+@media (max-width: 720px) {
+  /* 裝飾圖 */
+  .xx-art-slot {
+    /* 最小高度 240px。 */
+    min-height: 240px;
+  }
+}
+/* Friend artwork: atlas covers and deep-sky photos, without changing card layouts. */
+.xx-atlas-image { position:relative; width:100%; aspect-ratio:600/420; background:#0d1b37; overflow:hidden; display:grid; place-items:center; }
+.xx-atlas-image img { width:100%; height:100%; position:absolute; inset:0; object-fit:contain; z-index:1; }
+.xx-atlas-fallback { color:#e8cb93; font-size:14px; text-align:center; padding:18px; }
+.xx-atlas-image.xx-loaded .xx-atlas-fallback { visibility:hidden; }
+.xx-deep-image { position:relative; width:100%; aspect-ratio:560/180; overflow:hidden; border-radius:14px; background:#0c1a35; }
+.xx-deep-image > img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; z-index:2; }
+.xx-deep-placeholder, .xx-deep-placeholder svg { width:100%; height:100%; display:block; }
+.xx-deep-image.xx-loaded .xx-deep-placeholder { visibility:hidden; }

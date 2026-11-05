@@ -1,0 +1,10 @@
+/* 閱讀提示：選擇器決定套用對象，大括號內是該元件的樣式。
+   .名稱 代表 class，#名稱 代表 id；:hover 是滑鼠移入狀態，::before／::after 是偽元素。
+   px 是固定尺寸，% 依參考尺寸計算，vw／vh 依視窗計算，em 依字級計算。
+   var(--名稱) 讀取共用變數；@media 只在符合指定視窗條件時套用。 */
+/* 共用頁尾設定 */
+/* 共用頁尾擴充樣式；不覆寫原版 footer 的佈局 */
+:root {
+  /* 共用變數 --xingxu-footer-accent，透過 var(--xingxu-footer-accent) 套用。 */
+  --xingxu-footer-accent: #e9c58a;
+}

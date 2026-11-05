@@ -1,0 +1,474 @@
+/* 閱讀提示：選擇器決定套用對象，大括號內是該元件的樣式。
+   .名稱 代表 class，#名稱 代表 id；:hover 是滑鼠移入狀態，::before／::after 是偽元素。
+   px 是固定尺寸，% 依參考尺寸計算，vw／vh 依視窗計算，em 依字級計算。
+   var(--名稱) 讀取共用變數；@media 只在符合指定視窗條件時套用。 */
+/* 星空觀測站版面與控制項 */
+/* 頁面基礎 */
+body {
+  /* 外觀：背景。設定底色、漸層或背景圖；漸層可疊出星空與光暈效果。 */
+  background: #091326;
+  /* 文字樣式：文字顏色 #f0f3fa。 */
+  color: #f0f3fa;
+}
+/* 觀測站・主要內容 */
+.obs-main {
+  /* 最大寬度 1450px。 */
+  max-width: 1450px;
+  /* 間距：外距 auto、內距 110px 28px 60px；兩值為上下／左右，四值依序為上／右／下／左。 */
+  margin: auto;
+  padding: 110px 28px 60px;
+}
+/* 觀測站・介紹區 */
+.obs-intro {
+  /* 間距：下外距 27px。 */
+  margin-bottom: 27px;
+}
+/* 觀測站・介紹區・主標題 */
+.obs-intro h1 {
+  /* 文字樣式：字型 Georgia, "Noto Serif TC", serif、字級 clamp(32px, 4vw, 57px)、文字顏色 #f2e6cf。 clamp 依序指定最小值、彈性值與最大值。 */
+  font-family: Georgia, "Noto Serif TC", serif;
+  font-size: clamp(32px, 4vw, 57px);
+  color: #f2e6cf;
+  /* 間距：外距 12px 0。 */
+  margin: 12px 0;
+}
+/* 觀測站・介紹區・主標題 */
+.obs-intro h1 span {
+  /* 文字樣式：文字顏色 #e6c68b。 */
+  color: #e6c68b;
+}
+/* 觀測站・介紹區・文字段落 */
+.obs-intro > p:last-child {
+  /* 文字樣式：文字顏色 #b5c5df、行距 1.85。 */
+  color: #b5c5df;
+  line-height: 1.85;
+}
+/* 觀測站・外框 */
+.obs-shell {
+  /* 外觀：邊框、圓角、背景、陰影或光暈。設定邊框粗細、線型與顏色；透明色可做出較柔和的分隔。 */
+  border: 1px solid #405372;
+  border-radius: 22px;
+  /* 控制超出容器的內容：hidden 裁切，auto 在需要時提供捲動。 */
+  overflow: hidden;
+  background: #101e36;
+  box-shadow: 0 22px 70px #03081266;
+}
+/* 觀測站・網站頂部導覽 */
+.obs-top {
+  /* 間距：內距 20px 25px。 */
+  padding: 20px 25px;
+  /* 使用 Flex 排列；主方向分散到兩側；交叉方向置中；間隔 15px。 */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  /* 外觀：背景、下方分隔線。設定下方邊框，作為導覽或內容區的分隔。 */
+  background: #162743;
+  border-bottom: 1px solid #3d4f6b;
+}
+/* 觀測站・網站頂部導覽・重點文字 */
+.obs-top strong {
+  /* 文字樣式：文字顏色 #f1d6a1、字距 1px。 */
+  color: #f1d6a1;
+  /* 以 block 方式顯示。 */
+  display: block;
+  letter-spacing: 1px;
+}
+/* 觀測站・網站頂部導覽・補充文字 */
+.obs-top small {
+  /* 文字樣式：文字顏色 #a9bad5。 */
+  color: #a9bad5;
+  /* 以 block 方式顯示。 */
+  display: block;
+  /* 間距：上外距 5px。 */
+  margin-top: 5px;
+}
+/* 觀測站・狀態提示 */
+.obs-live {
+  /* 文字樣式：字級 11px、文字顏色 #9ccabf、字距 1.5px。 */
+  font-size: 11px;
+  color: #9ccabf;
+  letter-spacing: 1.5px;
+}
+/* 觀測站・狀態燈 */
+.obs-dot {
+  /* 以 inline-block 方式顯示。 */
+  display: inline-block;
+  /* 外觀：背景、圓角。 */
+  background: #73d9b9;
+  /* 寬度 7px；高度 7px。 */
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  /* 間距：右外距 8px。 */
+  margin-right: 8px;
+}
+/* 觀測站・工具列 */
+.obs-toolbar {
+  /* 使用 Flex 排列；間隔 8px；空間不足時換行。 */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  /* 間距：內距 13px 19px。 */
+  padding: 13px 19px;
+  /* 外觀：下方分隔線。 */
+  border-bottom: 1px solid #304363;
+}
+/* 觀測站・工具列・按鈕 */
+.obs-toolbar button,
+.obs-quick button {
+  /* 外觀：邊框、圓角、背景。 */
+  border: 1px solid #60728c;
+  border-radius: 25px;
+  /* 間距：內距 9px 15px。 */
+  padding: 9px 15px;
+  background: #1a2d4b;
+  /* 文字樣式：文字顏色 #dfe8f8、字級 13px。 */
+  color: #dfe8f8;
+  /* 設定游標外觀；pointer 提示可以點擊，grab 提示可以拖曳。 */
+  cursor: pointer;
+  font-size: 13px;
+}
+/* 觀測站・工具列・按鈕 */
+.obs-toolbar button[aria-pressed="true"],
+.obs-quick button:hover {
+  /* 外觀：背景、邊框顏色。改變邊框顏色，常用來強調滑鼠移入或選取狀態。 */
+  background: #dfc28c;
+  /* 文字樣式：文字顏色 #111d33。 */
+  color: #111d33;
+  border-color: #dfc28c;
+}
+/* 觀測站・工具列・按鈕 */
+.obs-toolbar button:hover {
+  /* 外觀：邊框顏色。 */
+  border-color: #e8c990;
+}
+/* 觀測站・網格排列 */
+.obs-grid {
+  /* 使用 Grid 網格排列；grid-template-columns 決定欄數與寬度，fr 表示可分配空間的比例。 */
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 285px;
+}
+/* 觀測站・星空顯示區 */
+.obs-viewport {
+  /* 定位方式：relative 提供子元素定位基準，absolute 依定位容器放置，sticky 在捲動時黏住指定位置。 */
+  position: relative;
+  /* 高度 560px；最小寬度 0。 */
+  height: 560px;
+  min-width: 0;
+  /* 控制超出容器的內容：hidden 裁切，auto 在需要時提供捲動。 */
+  overflow: hidden;
+  /* 外觀：背景。 */
+  background: radial-gradient(
+    ellipse at 55% 40%,
+    #1b3457 0%,
+    #0a152b 63%,
+    #050b17 100%
+  );
+  /* 設定瀏覽器如何處理觸控手勢，讓自訂拖曳或縮放不與頁面捲動衝突。 */
+  touch-action: none;
+  cursor: grab;
+}
+/* 觀測站・星空顯示區 */
+.obs-viewport:active {
+  /* 設定游標外觀；pointer 提示可以點擊，grab 提示可以拖曳。 */
+  cursor: grabbing;
+}
+/* 星圖 */
+#sky {
+  /* 以 block 方式顯示。 */
+  display: block;
+  /* 寬度 100%；高度 100%。 */
+  width: 100%;
+  height: 100%;
+  /* 設定瀏覽器如何處理觸控手勢，讓自訂拖曳或縮放不與頁面捲動衝突。 */
+  touch-action: none;
+}
+/* 觀測站 */
+.obs-crosshair {
+  /* 定位：position absolute、left 50%、top 50%；偏移值配合定位方式決定實際位置。 */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  /* 以平移、旋轉或縮放調整外觀，不直接改變原本的排版佔位。 */
+  transform: translate(-50%, -50%);
+  /* 控制元素是否接收滑鼠事件；none 可讓裝飾層不擋住下方操作。 */
+  pointer-events: none;
+  /* 文字樣式：文字顏色 #b7c8e055、字級 26px。 */
+  color: #b7c8e055;
+  font-size: 26px;
+}
+/* 觀測站 */
+.obs-compass {
+  /* 定位：position absolute、top 16px、left 18px；偏移值配合定位方式決定實際位置。 */
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  /* 使用 Flex 排列；子項目由上往下排列；間隔 4px。 */
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  /* 文字樣式：文字顏色 #c6d6ee、字型簡寫 11px monospace。 */
+  color: #c6d6ee;
+  font: 11px monospace;
+  /* 控制元素是否接收滑鼠事件；none 可讓裝飾層不擋住下方操作。 */
+  pointer-events: none;
+}
+/* 觀測站・操作提示 */
+.obs-hint {
+  /* 定位：position absolute、bottom 14px、left 18px；偏移值配合定位方式決定實際位置。 */
+  position: absolute;
+  bottom: 14px;
+  left: 18px;
+  /* 文字樣式：文字顏色 #a5b6cf、字級 12px。 */
+  color: #a5b6cf;
+  font-size: 12px;
+  /* 控制元素是否接收滑鼠事件；none 可讓裝飾層不擋住下方操作。 */
+  pointer-events: none;
+}
+/* 觀測站 */
+.obs-aside {
+  /* 間距：內距 23px。 */
+  padding: 23px;
+  /* 外觀：背景、border-left。 */
+  background: linear-gradient(160deg, #1a2c4a, #101d35);
+  border-left: 1px solid #3d4f6b;
+}
+/* 觀測站 */
+.obs-kicker {
+  /* 文字樣式：字級 11px、文字顏色 #dcbf8b、字距 1.4px。 */
+  font-size: 11px;
+  color: #dcbf8b;
+  letter-spacing: 1.4px;
+}
+/* 觀測站・無搜尋結果提示 */
+.obs-empty-icon {
+  /* 文字樣式：字級 65px、文字顏色 #e2c18d。 */
+  font-size: 65px;
+  color: #e2c18d;
+  /* 間距：外距 26px 0 4px。 */
+  margin: 26px 0 4px;
+}
+/* 觀測站・區塊標題 */
+.obs-aside h2 {
+  /* 文字樣式：字級 25px、行距 1.45、文字顏色 #f0d8a9。 */
+  font-size: 25px;
+  line-height: 1.45;
+  /* 間距：外距 15px 0。 */
+  margin: 15px 0;
+  color: #f0d8a9;
+}
+/* 觀測站・文字段落 */
+.obs-aside p {
+  /* 文字樣式：字級 14px、文字顏色 #c4d2e5、行距 1.9。 */
+  font-size: 14px;
+  color: #c4d2e5;
+  line-height: 1.9;
+}
+/* 觀測站 */
+.obs-name-en {
+  /* 文字樣式：文字顏色 #9db3d3、字級 14px。 */
+  color: #9db3d3;
+  font-size: 14px;
+}
+/* 觀測站 */
+.obs-meta {
+  /* 間距：內距 12px 0。 */
+  padding: 12px 0;
+  /* 外觀：上方分隔線。設定上方邊框，作為內容區的視覺分隔。 */
+  border-top: 1px solid #3c4f6c;
+  /* 文字樣式：字級 13px、行距 1.8。 */
+  font-size: 13px;
+  line-height: 1.8;
+}
+/* 觀測站 */
+.obs-meta b {
+  /* 文字樣式：文字顏色 #f0d8a9。 */
+  color: #f0d8a9;
+}
+/* 觀測站 */
+.obs-link {
+  /* 以 inline-block 方式顯示。 */
+  display: inline-block;
+  /* 間距：上外距 12px、內距 10px 16px。 */
+  margin-top: 12px;
+  padding: 10px 16px;
+  /* 外觀：背景、圓角。 */
+  background: #e5c791;
+  border-radius: 24px;
+  /* 文字樣式：文字顏色 #10203a !important、文字裝飾 none、字重 700、字級 13px。 */
+  color: #10203a !important;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 13px;
+}
+/* 觀測站 */
+.obs-mini {
+  /* 外觀：上方分隔線。 */
+  border-top: 1px solid #42536f;
+  /* 間距：上外距 25px、上留白 17px。 */
+  margin-top: 25px;
+  padding-top: 17px;
+}
+/* 觀測站・重點文字 */
+.obs-mini strong {
+  /* 文字樣式：文字顏色 #e4c68f。 */
+  color: #e4c68f;
+}
+/* 觀測站 */
+.obs-bottom {
+  /* 使用 Flex 排列；主方向分散到兩側；交叉方向置中；間隔 20px。 */
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+  /* 間距：內距 19px 24px。 */
+  padding: 19px 24px;
+  /* 外觀：上方分隔線。 */
+  border-top: 1px solid #3b4d6b;
+}
+/* 觀測站・重點文字 */
+.obs-bottom strong {
+  /* 文字樣式：文字顏色 #edcf9d。 */
+  color: #edcf9d;
+}
+/* 觀測站・文字段落 */
+.obs-bottom p {
+  /* 文字樣式：字級 12px、文字顏色 #9db0cd。 */
+  font-size: 12px;
+  color: #9db0cd;
+  /* 間距：外距 5px 0。 */
+  margin: 5px 0;
+}
+/* 觀測站 */
+.obs-quick {
+  /* 使用 Flex 排列；主方向靠尾端；間隔 7px；空間不足時換行。 */
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+/* 觀測站・補充提醒 */
+.obs-note {
+  /* 最大寬度 1050px。 */
+  max-width: 1050px;
+  /* 間距：外距 40px auto 0、內距 25px。 */
+  margin: 40px auto 0;
+  padding: 25px;
+  /* 外觀：邊框、圓角、背景。 */
+  border: 1px solid #344a67;
+  border-radius: 16px;
+  background: #111f36;
+}
+/* 觀測站・補充提醒・區塊標題 */
+.obs-note h2 {
+  /* 文字樣式：文字顏色 #edcf9d、字級 22px。 */
+  color: #edcf9d;
+  font-size: 22px;
+}
+/* 觀測站・補充提醒・文字段落 */
+.obs-note p {
+  /* 文字樣式：文字顏色 #b6c6df、行距 1.9、字級 14px。 */
+  color: #b6c6df;
+  line-height: 1.9;
+  font-size: 14px;
+}
+/* 觀測站・補充提醒・連結 */
+.obs-note a {
+  /* 文字樣式：文字顏色 #edcf9d。 */
+  color: #edcf9d;
+}
+/* 當螢幕符合這個條件時，套用接下來的響應式排版規則。 */
+@media (max-width: 880px) {
+  /* 觀測站・網格排列 */
+  .obs-grid {
+    /* grid-template-columns 決定欄數與寬度，fr 表示可分配空間的比例。 */
+    grid-template-columns: 1fr;
+  }
+  /* 觀測站 */
+  .obs-aside {
+    border-left: 0;
+    /* 外觀：上方分隔線。 */
+    border-top: 1px solid #3d4f6b;
+  }
+  /* 觀測站・星空顯示區 */
+  .obs-viewport {
+    /* 高度 480px。 */
+    height: 480px;
+  }
+  /* 觀測站 */
+  .obs-bottom {
+    /* 以 block 方式顯示。 */
+    display: block;
+  }
+  /* 觀測站 */
+  .obs-quick {
+    /* 主方向靠起點。 */
+    justify-content: flex-start;
+    /* 間距：上外距 14px。 */
+    margin-top: 14px;
+  }
+}
+/* 當螢幕符合這個條件時，套用接下來的響應式排版規則。 */
+@media (max-width: 540px) {
+  /* 觀測站・主要內容 */
+  .obs-main {
+    /* 間距：內距 100px 12px 35px。 */
+    padding: 100px 12px 35px;
+  }
+  /* 觀測站・網站頂部導覽 */
+  .obs-top {
+    /* 間距：內距 15px。 */
+    padding: 15px;
+  }
+  /* 觀測站・狀態提示 */
+  .obs-live {
+    /* 隱藏此元件。 */
+    display: none;
+  }
+  /* 觀測站・星空顯示區 */
+  .obs-viewport {
+    /* 高度 410px。 */
+    height: 410px;
+  }
+  /* 觀測站・工具列 */
+  .obs-toolbar {
+    /* 間距：內距 10px。 */
+    padding: 10px;
+  }
+  /* 觀測站・工具列・按鈕 */
+  .obs-toolbar button {
+    /* 間距：內距 8px 10px。 */
+    padding: 8px 10px;
+    /* 文字樣式：字級 12px。 */
+    font-size: 12px;
+  }
+  /* 觀測站 */
+  .obs-aside {
+    /* 間距：內距 18px。 */
+    padding: 18px;
+  }
+  /* 觀測站・操作提示 */
+  .obs-hint {
+    /* 文字樣式：字級 10px。 */
+    font-size: 10px;
+  }
+}
+/* 四季代表星群快捷定位 */
+.obs-asterism-heading {
+  flex-basis: 100%;
+  /* 寬度 100%。 */
+  width: 100%;
+  /* 文字樣式：文字顏色 #e9c58a、字重 700。 */
+  color: #e9c58a;
+  font-weight: 700;
+  /* 間距：上外距 12px。 */
+  margin-top: 12px;
+}
+/* 觀測站・按鈕 */
+.obs-asterism-button {
+  /* 外觀：邊框顏色。 */
+  border-color: #bda170 !important;
+  /* 文字樣式：文字顏色 #f5d69e !important。 */
+  color: #f5d69e !important;
+}

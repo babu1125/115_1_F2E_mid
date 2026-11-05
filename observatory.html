@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <!-- 設定資訊 -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="星序星空觀測站：根據恆星赤經赤緯座標探索星空，點選亮星認識星座。"
+    />
+    <!-- 網頁標題 -->
+    <title>星空觀測站｜星序 Seasons of the Sky</title>
+    <!-- CSS連結 -->
+    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="css/observatory.css" />
+    <link rel="stylesheet" href="css/colors.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <!-- 網站圖示 -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  </head>
+  <!-- 網頁內容 -->
+  <body>
+    <!-- 網站標誌與導覽列 -->
+    <header class="top">
+      <a class="brand" href="index.html"
+        ><span class="brandmark">✦</span
+        ><span>星序 <small>SEASONS OF THE SKY</small></span></a
+      >
+      <!-- 導覽列 -->
+      <nav aria-label="主要導覽">
+        <a href="index.html#seasons">四季星空</a
+        ><a href="index.html#catalog">星座圖鑑</a
+        ><a href="observatory.html" aria-current="page">🔭 星空觀測站</a
+        ><a href="index.html#about">關於星序</a>
+      </nav>
+      <button
+        class="mobile-nav"
+        id="navBtn"
+        aria-label="展開導覽"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+    </header>
+    <!-- 主要內容 -->
+    <main class="obs-main">
+      <!-- 觀測站・介紹區 -->
+      <div class="obs-intro">
+        <p class="eyebrow">SKY EXPLORER · INTERACTIVE OBSERVATORY</p>
+        <h1>星空觀測站 <span>✧</span></h1>
+        <p>
+          用滑鼠拖曳、滾輪縮放，或用手指移動星空。點擊亮星，認識它的名稱、所屬星座與故事。
+        </p>
+      </div>
+      <!-- 觀測站 外框 -->
+      <div class="obs-shell">
+        <!-- 觀測站標題與狀態列 -->
+        <div class="obs-top">
+          <div>
+            <strong>✦ 星序 · 天球探索模式</strong
+            ><small>星體位置依 J2000 赤經／赤緯資料繪製 · 非即時地平觀測</small>
+          </div>
+          <!-- 觀測站 狀態提示 -->
+          <div class="obs-live">
+            <span class="obs-dot"></span> STAR FIELD · SIMULATION
+          </div>
+        </div>
+        <!-- 觀測站 工具列 -->
+        <div class="obs-toolbar">
+          <button id="lines" aria-pressed="true">✧ 星座連線：開</button
+          ><button id="labels" aria-pressed="true">✦ 亮星名稱：開</button
+          ><button id="zoomIn" aria-label="放大星空">＋ 放大</button
+          ><button id="zoomOut" aria-label="縮小星空">－ 縮小</button
+          ><button id="reset">↺ 重設視野</button>
+        </div>
+        <!-- 觀測站 網格排列 -->
+        <div class="obs-grid">
+          <!-- 觀測站 星空顯示區 -->
+          <div class="obs-viewport" id="viewport">
+            <!-- 互動星空畫布 -->
+            <canvas
+              id="sky"
+              aria-label="互動天球星圖，亮星以真實赤經赤緯座標投影，使用下方亮星清單亦可選取"
+              tabindex="0"
+            ></canvas>
+            <!-- 星空中心準星 -->
+            <div class="obs-crosshair" aria-hidden="true">＋</div>
+            <!-- 視野中心座標與寬度 -->
+            <div class="obs-compass">
+              <span id="centerLabel">RA 05h · Dec +15°</span
+              ><span id="fovLabel">視野寬度 100°</span>
+            </div>
+            <!-- 觀測站 操作提示 -->
+            <div class="obs-hint">拖曳移動星空 · 滾輪縮放 · 點擊亮星</div>
+          </div>
+          <!-- 觀測站 -->
+          <aside class="obs-aside">
+            <div class="obs-kicker">✦ STAR IDENTIFICATION</div>
+            <div id="starInfo" aria-live="polite">
+              <!-- 無搜尋結果提示 -->
+              <div class="obs-empty-icon">✧</div>
+              <h2>選一顆星星</h2>
+              <p>點擊星圖中的亮星，查看它的名稱與所屬星座。</p>
+            </div>
+            <div class="obs-mini">
+              <strong>觀測說明</strong>
+              <p>
+                亮星的座標以天球赤經／赤緯表示；畫面是可平移的教學星圖，不代表今晚在臺灣實際看到的方位。
+              </p>
+            </div>
+          </aside>
+        </div>
+        <div class="obs-bottom">
+          <div>
+            <strong>✦ 快速尋星</strong>
+            <p>選擇亮星或四季代表星群，星圖會移動到對應區域。</p>
+          </div>
+          <div class="obs-quick" id="quickStars"></div>
+        </div>
+      </div>
+      <!-- 下面區塊 -->
+      <section class="obs-note">
+        <h2>星空是怎麼畫出來的？</h2>
+        <p>
+          可點選的具名亮星採用近似的 J2000.0
+          天球赤經、赤緯與視星等資料，按座標投影到星圖，而不是隨機決定位置。暗淡背景光點僅用於氣氛，不可點選、也不代表真實恆星座標。星座連線是部分代表星的教學連線，不是
+          IAU 正式星座邊界。
+        </p>
+        <p>
+          參考座標與核對方向：<a
+            href="https://simbad.cds.unistra.fr/simbad/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >SIMBAD 天體資料庫 ↗</a
+          >、<a
+            href="https://gea.esac.esa.int/archive/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >ESA Gaia Archive ↗</a
+          >。
+        </p>
+      </section>
+    </main>
+<!-- 頁面最下方的頁尾資訊。 -->
+    <footer>
+      <span>✦ 星序 · Seasons of the Sky</span
+      ><span>星空觀測站</span><a href="index.html">返回首頁 ↗</a>
+    </footer>
+    <!-- 載入首頁搜尋與篩選功能 -->
+    <script src="js/site.js"></script>
+    <!-- 載入觀測站恆星資料 -->
+    <script src="js/observatory-data.js"></script>
+    <!-- 載入星座連線資料 -->
+    <script src="js/constellation-lines.js"></script>
+    <!-- 載入星空觀測站操作功能 -->
+    <script src="js/observatory.js"></script>
+  </body>
+</html>

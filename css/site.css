@@ -1,0 +1,889 @@
+/* 閱讀提示：選擇器決定套用對象，大括號內是該元件的樣式。
+   .名稱 代表 class，#名稱 代表 id；:hover 是滑鼠移入狀態，::before／::after 是偽元素。
+   px 是固定尺寸，% 依參考尺寸計算，vw／vh 依視窗計算，em 依字級計算。
+   var(--名稱) 讀取共用變數；@media 只在符合指定視窗條件時套用。 */
+/* 網站首頁與共用元件樣式 */
+/* 全站尺寸計算 */
+* {
+  /* border-box 讓設定的寬高包含 padding 與 border，比較容易控制元件尺寸。 */
+  box-sizing: border-box;
+}
+/* 頁面 */
+html {
+  /* smooth 讓頁內連結捲動時平順移動。 */
+  scroll-behavior: smooth;
+}
+/* 頁面基礎 */
+body {
+  /* 間距：外距 0；兩值為上下／左右，四值依序為上／右／下／左。 */
+  margin: 0;
+  /* 文字樣式：文字顏色 #e9edf7、字型 依下方清單。 */
+  color: #e9edf7;
+  /* 外觀：背景、背景圖層、背景圖尺寸、背景圖位置。設定底色、漸層或背景圖；漸層可疊出星空與光暈效果。 */
+  background: #091225;
+
+  font-family:
+    system-ui,
+    -apple-system,
+    "Noto Sans TC",
+    "Microsoft JhengHei",
+    sans-serif;
+
+  background-image:
+    radial-gradient(#c9d6f540 1px, transparent 1px),
+    radial-gradient(#c9d6f51a 1px, transparent 1px);
+  background-size:
+    170px 170px,
+    93px 93px;
+  background-position:
+    17px 22px,
+    65px 40px;
+
+}
+/* 連結 */
+a {
+  /* 文字樣式：文字顏色 inherit、文字裝飾 none。 */
+  color: inherit;
+  text-decoration: none;
+}
+/* 按鈕 */
+button,
+input {
+  /* 文字樣式：字型簡寫 inherit。 */
+  font: inherit;
+}
+/* 網站頂部導覽 */
+.top {
+  /* 高度 76px。 */
+  height: 76px;
+  /* 使用 Flex 排列；主方向分散到兩側；交叉方向置中。 */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* 間距：內距 0 max(5vw, 24px)。 */
+  padding: 0 max(5vw, 24px);
+  /* 外觀：下方分隔線、背景、背景模糊。設定下方邊框，作為導覽或內容區的分隔。 */
+  border-bottom: 1px solid #ffffff1d;
+  background: #0d182bde;
+  /* 定位方式：relative 提供子元素定位基準，absolute 依定位容器放置，sticky 在捲動時黏住指定位置。 */
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(16px);
+}
+/* 網站標誌 */
+.brand {
+  /* 使用 Flex 排列；交叉方向置中；間隔 13px。 */
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  /* 文字樣式：字型 Georgia, serif、字級 24px、字距 0.15em、字重 700。 */
+  font-family: Georgia, serif;
+  font-size: 24px;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+}
+/* .brandmark 樣式 */
+.brandmark {
+  /* 文字樣式：字級 30px、文字顏色 #e4c68e。 */
+  font-size: 30px;
+  color: #e4c68e;
+}
+/* 網站標誌・補充文字 */
+.brand small {
+  /* 以 block 方式顯示。 */
+  display: block;
+  /* 文字樣式：字型簡寫 10px system-ui、字距 0.27em、文字顏色 #9baac2。 */
+  font: 10px system-ui;
+  letter-spacing: 0.27em;
+  color: #9baac2;
+  /* 間距：上外距 4px。 */
+  margin-top: 4px;
+}
+/* 網站頂部導覽・導覽列 */
+.top nav {
+  /* 使用 Flex 排列；間隔 32px。 */
+  display: flex;
+  gap: 32px;
+  /* 文字樣式：字級 14px、文字顏色 #d4ddec。 */
+  font-size: 14px;
+  color: #d4ddec;
+}
+/* 網站頂部導覽・導覽列・連結 */
+.top nav a:hover {
+  /* 文字樣式：文字顏色 #e5c48c。 */
+  color: #e5c48c;
+}
+/* 行動版・導覽列 */
+.mobile-nav {
+  /* 隱藏此元件。 */
+  display: none;
+  /* 外觀：背景、邊框。設定邊框粗細、線型與顏色；透明色可做出較柔和的分隔。 */
+  background: none;
+  border: 0;
+  /* 文字樣式：文字顏色 white、字級 28px。 */
+  color: white;
+  font-size: 28px;
+}
+/* 主視覺 */
+.hero {
+  /* 最小高度 690px。 */
+  min-height: 690px;
+  /* 定位：position relative；偏移值配合定位方式決定實際位置。 */
+  position: relative;
+  /* 使用 Flex 排列；交叉方向置中。 */
+  display: flex;
+  align-items: center;
+  /* 控制超出容器的內容：hidden 裁切，auto 在需要時提供捲動。 */
+  overflow: hidden;
+  /* 外觀：下方分隔線。 */
+  border-bottom: 1px solid #ffffff1a;
+}
+/* 主視覺・背景光暈 */
+.hero-glow {
+  /* 定位：position absolute、inset 0；偏移值配合定位方式決定實際位置。 */
+  position: absolute;
+  inset: 0;
+  /* 外觀：背景。 */
+  background:
+    radial-gradient(ellipse at 75% 50%, #263c64 0%, transparent 48%),
+    radial-gradient(ellipse at 24% 42%, #172c4d 0%, transparent 55%);
+  /* 控制元素是否接收滑鼠事件；none 可讓裝飾層不擋住下方操作。 */
+  pointer-events: none;
+}
+/* 主視覺・內層排版 */
+.hero-inner {
+  /* 定位：position relative、z-index 2；偏移值配合定位方式決定實際位置。 */
+  position: relative;
+  z-index: 2;
+  /* 寬度 min(1140px, 90%)。 */
+  width: min(1140px, 90%);
+  /* 間距：外距 auto、內距 75px 0。 */
+  margin: auto;
+  padding: 75px 0;
+}
+/* .eyebrow 樣式 */
+.eyebrow {
+  /* 文字樣式：文字顏色 #d9b97d、字距 0.23em、字級 12px、字重 700。 */
+  color: #d9b97d;
+  letter-spacing: 0.23em;
+  font-size: 12px;
+  font-weight: 700;
+}
+/* 主視覺・主標題 */
+.hero h1 {
+  /* 文字樣式：字級 clamp(42px, 5.3vw, 80px)、行距 1.34、字重 650、字距 0.07em。 clamp 依序指定最小值、彈性值與最大值。 */
+  font-size: clamp(42px, 5.3vw, 80px);
+  line-height: 1.34;
+  font-weight: 650;
+  letter-spacing: 0.07em;
+  /* 間距：外距 25px 0。 */
+  margin: 25px 0;
+}
+/* 主視覺・主標題 */
+.hero h1 em {
+  font-style: normal;
+  /* 文字樣式：文字顏色 #e4c68e。 */
+  color: #e4c68e;
+}
+/* 主視覺・介紹文字 */
+.hero-copy {
+  /* 最大寬度 580px。 */
+  max-width: 580px;
+  /* 文字樣式：字級 17px、行距 2、文字顏色 #b9c9dd。 */
+  font-size: 17px;
+  line-height: 2;
+  color: #b9c9dd;
+}
+/* 主視覺・操作連結 */
+.hero-actions {
+  /* 使用 Flex 排列；間隔 15px；空間不足時換行。 */
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  /* 間距：外距 34px 0 55px。 */
+  margin: 34px 0 55px;
+}
+/* 按鈕 */
+.btn {
+  /* 間距：內距 15px 27px。 */
+  padding: 15px 27px;
+  /* 外觀：圓角、邊框。設定圓角；50% 可在等寬高元素上形成圓形。 */
+  border-radius: 40px;
+  border: 1px solid #bfa477;
+  /* 文字樣式：字重 700。 */
+  font-weight: 700;
+}
+/* 按鈕・主要 */
+.btn.primary {
+  /* 外觀：背景。 */
+  background: #e5c891;
+  /* 文字樣式：文字顏色 #142038。 */
+  color: #142038;
+}
+/* 按鈕・外框 */
+.btn.ghost {
+  /* 文字樣式：文字顏色 #e5c891。 */
+  color: #e5c891;
+}
+/* 按鈕 */
+.btn:hover {
+  /* 以平移、旋轉或縮放調整外觀，不直接改變原本的排版佔位。 */
+  transform: translateY(-2px);
+  transition: 0.2s;
+}
+/* 主視覺・統計資訊 */
+.hero-stats {
+  /* 使用 Flex 排列；間隔 34px；空間不足時換行。 */
+  display: flex;
+  gap: 34px;
+  flex-wrap: wrap;
+  /* 文字樣式：文字顏色 #aab9cf、字級 13px。 */
+  color: #aab9cf;
+  font-size: 13px;
+}
+/* 主視覺・統計資訊・重點文字 */
+.hero-stats strong {
+  /* 文字樣式：文字顏色 #e6c88d、字型簡寫 依下方清單。 */
+  color: #e6c88d;
+  font:
+    28px Georgia,
+    serif;
+  /* 間距：右外距 7px。 */
+  margin-right: 7px;
+}
+/* 主視覺・裝飾圖 */
+.hero-art {
+  /* 定位：position absolute、right 8%、top 15%；偏移值配合定位方式決定實際位置。 */
+  position: absolute;
+  right: 8%;
+  top: 15%;
+  /* 寬度 470px；高度 470px。 */
+  width: 470px;
+  height: 470px;
+  /* 外觀：透明度。設定整個元素的透明度，包含內容與子元素；0 為透明，1 為不透明。 */
+  opacity: 0.85;
+  /* 控制元素是否接收滑鼠事件；none 可讓裝飾層不擋住下方操作。 */
+  pointer-events: none;
+}
+/* 軌道裝飾 */
+.orbit {
+  /* 定位：position absolute；偏移值配合定位方式決定實際位置。 */
+  position: absolute;
+  /* 外觀：邊框、圓角。 */
+  border: 1px solid #e3c78b55;
+  border-radius: 50%;
+  /* 以平移、旋轉或縮放調整外觀，不直接改變原本的排版佔位。 */
+  transform: rotate(-22deg);
+}
+/* .orbit1 樣式 */
+.orbit1 {
+  /* 同時設定上下左右的定位距離；0 可讓絕對定位元素鋪滿定位容器。 */
+  inset: 18%;
+}
+/* .orbit2 樣式 */
+.orbit2 {
+  /* 定位：inset 7%；偏移值配合定位方式決定實際位置。 */
+  inset: 7%;
+}
+/* .orbit3 樣式 */
+.orbit3 {
+  /* 定位：inset -4%；偏移值配合定位方式決定實際位置。 */
+  inset: -4%;
+  border-style: dashed;
+  /* 外觀：透明度。 */
+  opacity: 0.5;
+}
+/* 星座 */
+.central-star {
+  /* 定位：position absolute、inset 0；偏移值配合定位方式決定實際位置。 */
+  position: absolute;
+  inset: 0;
+  /* 使用 Grid 網格排列。 */
+  display: grid;
+  place-items: center;
+  /* 文字樣式：字級 150px、文字顏色 #f2d49e、text-shadow。 */
+  font-size: 150px;
+  color: #f2d49e;
+  text-shadow: 0 0 70px #d2ab61;
+}
+/* 標示 */
+.orb-label {
+  /* 定位：position absolute；偏移值配合定位方式決定實際位置。 */
+  position: absolute;
+  /* 文字樣式：字型簡寫 12px Georgia、字距 0.25em、文字顏色 #e8ce9e。 */
+  font: 12px Georgia;
+  letter-spacing: 0.25em;
+  color: #e8ce9e;
+}
+/* 標示・連結 */
+.orb-label.a {
+  /* 設定與定位參考區上緣的距離；須搭配 position 才會影響位置。 */
+  top: 12%;
+  left: 12%;
+}
+/* 標示 */
+.orb-label.b {
+  /* 定位：top 22%、right 1%；偏移值配合定位方式決定實際位置。 */
+  top: 22%;
+  right: 1%;
+}
+/* 標示 */
+.orb-label.c {
+  /* 設定與定位參考區下緣的距離。 */
+  bottom: 15%;
+  left: 5%;
+}
+/* 標示 */
+.orb-label.d {
+  /* 定位：bottom 12%、right 10%；偏移值配合定位方式決定實際位置。 */
+  bottom: 12%;
+  right: 10%;
+}
+/* 內容區 */
+.section {
+  /* 寬度 min(1140px, 90%)。 */
+  width: min(1140px, 90%);
+  /* 間距：外距 0 auto、內距 100px 0。 */
+  margin: 0 auto;
+  padding: 100px 0;
+}
+/* 內容區・區塊標題 */
+.section-head {
+  /* 文字樣式：文字對齊 center。 */
+  text-align: center;
+  /* 間距：下外距 40px。 */
+  margin-bottom: 40px;
+}
+/* 內容區・區塊標題 */
+.section-head h2,
+.about h2 {
+  /* 文字樣式：字級 clamp(28px, 3.3vw, 43px)、字重 650、字距 0.08em。 clamp 依序指定最小值、彈性值與最大值。 */
+  font-size: clamp(28px, 3.3vw, 43px);
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  /* 間距：外距 12px 0 15px。 */
+  margin: 12px 0 15px;
+}
+/* 內容區・區塊標題・文字段落 */
+.section-head > p:last-child {
+  /* 文字樣式：文字顏色 #aab9cf、行距 1.8。 */
+  color: #aab9cf;
+  line-height: 1.8;
+}
+/* 季節・網格排列 */
+.season-grid {
+  /* 使用 Grid 網格排列；間隔 18px；grid-template-columns 決定欄數與寬度，fr 表示可分配空間的比例。 */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+/* 季節・卡片 */
+.season-card {
+  /* 高度 385px。 */
+  height: 385px;
+  /* 定位：position relative；偏移值配合定位方式決定實際位置。 */
+  position: relative;
+  /* 控制超出容器的內容：hidden 裁切，auto 在需要時提供捲動。 */
+  overflow: hidden;
+  /* 外觀：圓角、邊框、背景。 */
+  border-radius: 20px;
+  border: 1px solid #ffffff35;
+  background: #192b48;
+  /* 使用 Flex 排列；子項目由上往下排列；主方向分散到兩側。 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* 間距：內距 25px。 */
+  padding: 25px;
+  /* 讓屬性變化在指定時間內逐步完成，常用於滑鼠移入與選取效果。 */
+  transition:
+    transform 0.25s,
+    border-color 0.25s;
+}
+/* 季節・卡片 */
+.season-card:hover {
+  /* 以平移、旋轉或縮放調整外觀，不直接改變原本的排版佔位。 */
+  transform: translateY(-7px);
+  /* 外觀：邊框顏色。改變邊框顏色，常用來強調滑鼠移入或選取狀態。 */
+  border-color: #e6c98f;
+}
+/* 季節・卡片 */
+.season-card:before {
+  /* 設定偽元素的內容；空字串常用來建立純裝飾圖層。 */
+  content: "";
+  /* 定位：position absolute、inset 0；偏移值配合定位方式決定實際位置。 */
+  position: absolute;
+  inset: 0;
+  /* 外觀：背景、背景圖尺寸、透明度。 */
+  background:
+    radial-gradient(circle at 55% 28%, #fff9 0 2px, transparent 3px),
+    radial-gradient(circle at 80% 45%, #fff9 0 1px, transparent 2px),
+    radial-gradient(circle at 35% 70%, #fff9 0 1px, transparent 2px);
+  background-size:
+    70px 75px,
+    95px 105px,
+    60px 110px;
+  opacity: 0.5;
+}
+/* 春季 */
+.spring {
+  /* 外觀：背景。 */
+  background: linear-gradient(155deg, #344967, #182942 75%);
+}
+/* 夏季 */
+.summer {
+  /* 外觀：背景。 */
+  background: linear-gradient(155deg, #253e67, #152440 75%);
+}
+/* 秋季 */
+.autumn {
+  /* 外觀：背景。 */
+  background: linear-gradient(155deg, #58404d, #22273e 75%);
+}
+/* 冬季 */
+.winter {
+  /* 外觀：背景。 */
+  background: linear-gradient(155deg, #294764, #111e39 75%);
+}
+/* 季節 */
+.season-icon {
+  /* 文字樣式：字型簡寫 100px Georgia、文字對齊 center、文字顏色 #f1d9a4、text-shadow。 */
+  font: 100px Georgia;
+  text-align: center;
+  color: #f1d9a4;
+  text-shadow: 0 0 45px #e4bc8b80;
+  /* 定位：position relative；偏移值配合定位方式決定實際位置。 */
+  position: relative;
+  /* 間距：上外距 30px。 */
+  margin-top: 30px;
+}
+/* 季節 */
+.season-bottom {
+  /* 定位：position relative；偏移值配合定位方式決定實際位置。 */
+  position: relative;
+}
+/* 季節 */
+.season-en {
+  /* 文字樣式：字級 11px、字距 0.18em、文字顏色 #e2c58d。 */
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: #e2c58d;
+}
+/* 季節・次標題 */
+.season-bottom h3 {
+  /* 文字樣式：字級 28px、字距 0.09em。 */
+  font-size: 28px;
+  letter-spacing: 0.09em;
+  /* 間距：外距 10px 0。 */
+  margin: 10px 0;
+}
+/* 季節・文字段落 */
+.season-bottom p {
+  /* 文字樣式：字級 13px、文字顏色 #d0d8e6、行距 1.8。 */
+  font-size: 13px;
+  color: #d0d8e6;
+  line-height: 1.8;
+  /* 最小高度 46px。 */
+  min-height: 46px;
+}
+/* 季節 */
+.season-link {
+  /* 文字樣式：字級 13px、文字顏色 #e7cb96、字重 700。 */
+  font-size: 13px;
+  color: #e7cb96;
+  font-weight: 700;
+}
+/* 星座圖鑑・內容區 */
+.catalog-section {
+  /* 外觀：上方分隔線。設定上方邊框，作為內容區的視覺分隔。 */
+  border-top: 1px solid #ffffff15;
+}
+/* 星座圖鑑・控制列 */
+.catalog-controls {
+  /* 使用 Flex 排列；主方向分散到兩側；交叉方向置中；間隔 15px；空間不足時換行。 */
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+/* 搜尋欄 */
+.search {
+  /* 使用 Flex 排列；交叉方向置中；間隔 12px。 */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* 間距：內距 12px 18px。 */
+  padding: 12px 18px;
+  /* 外觀：邊框、背景、圓角。 */
+  border: 1px solid #ffffff40;
+  background: #15243c;
+  border-radius: 40px;
+  /* 最小寬度 min(100%, 410px)。 */
+  min-width: min(100%, 410px);
+}
+/* 搜尋欄 */
+.search span {
+  /* 文字樣式：字級 24px、文字顏色 #d8bb84。 */
+  font-size: 24px;
+  color: #d8bb84;
+}
+/* 搜尋欄・輸入欄 */
+.search input {
+  /* 外觀：邊框、背景。 */
+  border: 0;
+  /* 設定鍵盤焦點外框，方便辨認目前操作中的元素。 */
+  outline: 0;
+  background: transparent;
+  /* 文字樣式：文字顏色 white、字級 14px。 */
+  color: white;
+  /* 寬度 100%。 */
+  width: 100%;
+  font-size: 14px;
+}
+/* 搜尋欄・輸入欄 */
+.search input::placeholder {
+  /* 文字樣式：文字顏色 #a2b0c6。 */
+  color: #a2b0c6;
+}
+/* 季節篩選 */
+.filters {
+  /* 使用 Flex 排列；間隔 7px；空間不足時換行。 */
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+/* 季節篩選・按鈕 */
+.filters button {
+  /* 設定游標外觀；pointer 提示可以點擊，grab 提示可以拖曳。 */
+  cursor: pointer;
+  /* 外觀：邊框、圓角、背景。 */
+  border: 1px solid #ffffff3a;
+  border-radius: 24px;
+  background: #182a44;
+  /* 文字樣式：文字顏色 #dce6f4。 */
+  color: #dce6f4;
+  /* 間距：內距 10px 15px。 */
+  padding: 10px 15px;
+}
+/* 季節篩選・按鈕・目前選項 */
+.filters button.active,
+.filters button:hover {
+  /* 外觀：背景。 */
+  background: #e4c68e;
+  /* 文字樣式：文字顏色 #152238。 */
+  color: #152238;
+}
+/* 搜尋結果・計數 */
+.result-count {
+  /* 文字樣式：字級 13px、文字顏色 #b5c5da。 */
+  font-size: 13px;
+  color: #b5c5da;
+  /* 間距：外距 20px 0。 */
+  margin: 20px 0;
+}
+/* 星座・網格排列 */
+.star-grid {
+  /* 使用 Grid 網格排列；間隔 16px；grid-template-columns 決定欄數與寬度，fr 表示可分配空間的比例。 */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+/* 星座・卡片 */
+.star-card {
+  /* 使用 Flex 排列；子項目由上往下排列。 */
+  display: flex;
+  flex-direction: column;
+  /* 最小高度 220px。 */
+  min-height: 220px;
+  /* 間距：內距 24px。 */
+  padding: 24px;
+  /* 外觀：圓角、背景、邊框。 */
+  border-radius: 16px;
+  background: #172944;
+  border: 1px solid #ffffff26;
+  /* 讓屬性變化在指定時間內逐步完成，常用於滑鼠移入與選取效果。 */
+  transition: 0.2s;
+}
+/* 星座・卡片 */
+.star-card:hover {
+  /* 以平移、旋轉或縮放調整外觀，不直接改變原本的排版佔位。 */
+  transform: translateY(-4px);
+  /* 外觀：邊框顏色、背景。 */
+  border-color: #d9b97d;
+  background: #1d3352;
+}
+/* 星座・卡片 */
+.star-card .star-symbol {
+  /* 文字樣式：字型簡寫 30px Georgia、文字顏色 #e5c78f。 */
+  font: 30px Georgia;
+  color: #e5c78f;
+  /* 間距：下外距 15px。 */
+  margin-bottom: 15px;
+}
+/* 星座・卡片・補充文字 */
+.star-card small {
+  /* 文字樣式：文字顏色 #d8b87d、字級 11px、字距 0.13em。 */
+  color: #d8b87d;
+  font-size: 11px;
+  letter-spacing: 0.13em;
+}
+/* 星座・卡片・次標題 */
+.star-card h3 {
+  /* 文字樣式：字級 19px。 */
+  font-size: 19px;
+  /* 間距：外距 9px 0 7px。 */
+  margin: 9px 0 7px;
+}
+/* 星座・卡片・文字段落 */
+.star-card p {
+  /* 文字樣式：字級 13px、行距 1.7、文字顏色 #adbed4。 */
+  font-size: 13px;
+  line-height: 1.7;
+  color: #adbed4;
+  /* 間距：外距 0 0 15px。 */
+  margin: 0 0 15px;
+  /* 。 */
+  flex: 1;
+}
+/* 星座・卡片 */
+.star-card b {
+  /* 文字樣式：字級 13px、文字顏色 #e7c991。 */
+  font-size: 13px;
+  color: #e7c991;
+}
+/* 無搜尋結果提示 */
+.empty {
+  /* 間距：內距 40px。 */
+  padding: 40px;
+  /* 文字樣式：文字對齊 center、文字顏色 #c9d7e8。 */
+  text-align: center;
+  color: #c9d7e8;
+}
+/* 圖文介紹・網格排列 */
+.feature-grid {
+  /* 使用 Grid 網格排列；間隔 18px；grid-template-columns 決定欄數與寬度，fr 表示可分配空間的比例。 */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+/* 圖文介紹 */
+.feature {
+  /* 間距：內距 32px。 */
+  padding: 32px;
+  /* 外觀：邊框、圓角、背景。 */
+  border: 1px solid #ffffff2c;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #1c3050, #111d33);
+}
+/* 圖文介紹 */
+.feature > span {
+  /* 文字樣式：字級 35px、文字顏色 #e3c48a。 */
+  font-size: 35px;
+  color: #e3c48a;
+}
+/* 圖文介紹・次標題 */
+.feature h3 {
+  /* 文字樣式：字級 20px。 */
+  font-size: 20px;
+}
+/* 圖文介紹・文字段落 */
+.feature p {
+  /* 文字樣式：字級 14px、行距 1.9、文字顏色 #b6c5d8。 */
+  font-size: 14px;
+  line-height: 1.9;
+  color: #b6c5d8;
+  /* 最小高度 85px。 */
+  min-height: 85px;
+}
+/* 圖文介紹 */
+.feature b {
+  /* 文字樣式：文字顏色 #e5c68d、字級 13px。 */
+  color: #e5c68d;
+  font-size: 13px;
+}
+/* 圖文介紹 */
+.feature:hover {
+  /* 外觀：邊框顏色。 */
+  border-color: #e5c68d;
+}
+/* 關於星序 */
+.about {
+  /* 使用 Grid 網格排列；交叉方向置中；間隔 40px；grid-template-columns 決定欄數與寬度，fr 表示可分配空間的比例。 */
+  display: grid;
+  grid-template-columns: 1.4fr 0.6fr;
+  align-items: center;
+  gap: 40px;
+  /* 外觀：上方分隔線。 */
+  border-top: 1px solid #ffffff20;
+}
+/* 關於星序・文字段落 */
+.about p:not(.eyebrow) {
+  /* 文字樣式：行距 2、文字顏色 #b6c6da。 */
+  line-height: 2;
+  color: #b6c6da;
+}
+/* 關於星序・裝飾標誌 */
+.about-mark {
+  /* 文字樣式：文字對齊 center、字型簡寫 150px Georgia、文字顏色 #e3c88e、text-shadow。 */
+  text-align: center;
+  font: 150px Georgia;
+  color: #e3c88e;
+  text-shadow: 0 0 45px #c49e55;
+}
+/* 關於星序・裝飾標誌 */
+.about-mark span {
+  /* 以 block 方式顯示。 */
+  display: block;
+  /* 文字樣式：字型簡寫 13px Georgia、字距 0.3em、text-shadow。 */
+  font: 13px Georgia;
+  letter-spacing: 0.3em;
+  text-shadow: none;
+}
+/* 頁尾 */
+footer {
+  /* 使用 Flex 排列；主方向分散到兩側；間隔 18px；空間不足時換行。 */
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  /* 間距：內距 30px 5%。 */
+  padding: 30px 5%;
+  /* 外觀：上方分隔線。 */
+  border-top: 1px solid #ffffff24;
+  /* 文字樣式：文字顏色 #aebdd2、字級 12px。 */
+  color: #aebdd2;
+  font-size: 12px;
+}
+/* 頁尾・連結 */
+footer a {
+  /* 文字樣式：文字顏色 #e6c68b。 */
+  color: #e6c68b;
+}
+/* 當螢幕符合這個條件時，套用接下來的響應式排版規則。 */
+@media (max-width: 1080px) {
+  /* 主視覺・裝飾圖 */
+  .hero-art {
+    /* 外觀：透明度。 */
+    opacity: 0.3;
+    /* 設定與定位參考區右緣的距離。 */
+    right: -5%;
+  }
+  /* 季節・網格排列 */
+  .season-grid,
+  .star-grid {
+    /* grid-template-columns 決定欄數與寬度，fr 表示可分配空間的比例。 */
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+/* 當螢幕符合這個條件時，套用接下來的響應式排版規則。 */
+@media (max-width: 650px) {
+  /* 網站頂部導覽 */
+  .top {
+    /* 高度 68px。 */
+    height: 68px;
+  }
+  /* 網站頂部導覽・導覽列 */
+  .top nav {
+    /* 隱藏此元件；子項目由上往下排列；間隔 18px。 */
+    display: none;
+    /* 定位：position absolute、top 68px、left 0、right 0；偏移值配合定位方式決定實際位置。 */
+    position: absolute;
+    top: 68px;
+    left: 0;
+    right: 0;
+    /* 間距：內距 20px。 */
+    padding: 20px;
+    /* 外觀：背景。 */
+    background: #0d182b;
+    flex-direction: column;
+    gap: 18px;
+  }
+  /* 網站頂部導覽・導覽列・展開狀態 */
+  .top nav.open {
+    /* 使用 Flex 排列。 */
+    display: flex;
+  }
+  /* 行動版・導覽列 */
+  .mobile-nav {
+    /* 以 block 方式顯示。 */
+    display: block;
+  }
+  /* 主視覺 */
+  .hero {
+    /* 最小高度 600px。 */
+    min-height: 600px;
+  }
+  /* 主視覺・主標題 */
+  .hero h1 {
+    /* 文字樣式：字級 36px。 */
+    font-size: 36px;
+  }
+  /* 主視覺・裝飾圖 */
+  .hero-art {
+    /* 寬度 280px；高度 280px。 */
+    width: 280px;
+    height: 280px;
+    /* 定位：top 28%、right -10%；偏移值配合定位方式決定實際位置。 */
+    top: 28%;
+    right: -10%;
+    /* 外觀：透明度。 */
+    opacity: 0.16;
+  }
+  /* 主視覺・統計資訊 */
+  .hero-stats {
+    /* 間隔 14px。 */
+    gap: 14px;
+  }
+  /* 內容區 */
+  .section {
+    /* 間距：內距 65px 0。 */
+    padding: 65px 0;
+  }
+  /* 季節・網格排列 */
+  .season-grid,
+  .star-grid,
+  .feature-grid,
+  .about {
+    /* grid-template-columns 決定欄數與寬度，fr 表示可分配空間的比例。 */
+    grid-template-columns: 1fr;
+  }
+  /* 季節・卡片 */
+  .season-card {
+    /* 高度 290px。 */
+    height: 290px;
+  }
+  /* 季節 */
+  .season-icon {
+    /* 文字樣式：字級 70px。 */
+    font-size: 70px;
+    /* 間距：上外距 10px。 */
+    margin-top: 10px;
+  }
+  /* 星座圖鑑・控制列 */
+  .catalog-controls {
+    /* 交叉方向拉伸填滿。 */
+    align-items: stretch;
+  }
+  /* 搜尋欄 */
+  .search {
+    /* 最小寬度 100%。 */
+    min-width: 100%;
+  }
+  /* 季節篩選 */
+  .filters {
+    /* 主方向置中。 */
+    justify-content: center;
+  }
+  /* 圖文介紹・文字段落 */
+  .feature p {
+    /* 最小高度 0。 */
+    min-height: 0;
+  }
+  /* 關於星序・裝飾標誌 */
+  .about-mark {
+    /* 文字樣式：字級 90px。 */
+    font-size: 90px;
+  }
+}
